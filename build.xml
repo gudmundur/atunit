@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="popquiz" default="jar">
+	
+	<property name="version" value="0.1"/>
+    
+	<property name="build.dir" value="${basedir}/build"/>
+	<property name="src.dir" value="${basedir}/src"/>
+	<property name="test.dir" value="${basedir}/test"/>
+	<property name="lib.dir" value="${basedir}/lib"/>
+	
+	<path id="compile.classpath">
+	    <fileset dir="${lib.dir}" includes="**/*.jar"/>
+		<pathelement location="${build.dir}/classes"/>
+	</path>
+	
+    <target name="compile" description="compile source">
+        <mkdir dir="${build.dir}/classes"/>
+    	<mkdir dir="${build.dir}/testclasses"/>
+    	<javac srcdir="${src.dir}" debug="on" destdir="${build.dir}/classes">
+    	      <classpath refid="compile.classpath"/>
+    	</javac>
+    	<javac srcdir="${test.dir}" debug="on" destdir="${build.dir}/testclasses">
+    		<classpath refid="compile.classpath"/>
+    	</javac>
+    </target>
+
+	<target name="jar" depends="compile,test" description="package into jars">
+		<jar destfile="${build.dir}/${ant.project.name}-core.jar" basedir="${build.dir}/classes" includes="**/core/**"/>
+		<jar destfile="${build.dir}/${ant.project.name}-guice.jar" basedir="${build.dir}/classes" includes="**/guice/**"/>
+	</target>
+	
+	<target name="test" depends="compile" description="execute unit tests">
+		<delete dir="${build.dir}/testoutput"/>
+		<mkdir dir="${build.dir}/testoutput"/>
+		<junit printsummary="withOutAndErr">
+			<formatter type="plain"/>
+			<classpath>
+				<path refid="compile.classpath"/>
+				<path location="${build.dir}/testclasses"/>
+			</classpath>
+			<batchtest todir="${build.dir}/testoutput">
+				<fileset dir="${test.dir}">
+					<include name="**/*Test*.java"/>
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+	
+    <target name="clean" description="clean up build artifacts">
+    	<delete dir="${build.dir}"/>
+    </target>
+	
+</project>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="test"/>
+	<classpathentry kind="lib" path="lib/core/jmock/hamcrest-core.jar"/>
+	<classpathentry kind="lib" path="lib/core/jmock/hamcrest-library.jar"/>
+	<classpathentry kind="lib" path="lib/core/jmock/jmock.jar"/>
+	<classpathentry kind="lib" path="lib/core/jmock/jmock-junit4.jar"/>
+	<classpathentry kind="lib" path="lib/core/junit/junit.jar"/>
+	<classpathentry kind="lib" path="lib/guice/guice/aopalliance.jar"/>
+	<classpathentry kind="lib" path="lib/guice/guice/guice.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
