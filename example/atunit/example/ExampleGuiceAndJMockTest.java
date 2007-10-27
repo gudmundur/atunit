@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package atunit.guice;
+package atunit.example;
 
 import static org.junit.Assert.*;
 
@@ -25,10 +25,12 @@ import org.junit.runner.RunWith;
 
 
 
+import atunit.core.AtUnitOptions;
 import atunit.core.Mock;
 import atunit.core.AtUnit;
 import atunit.core.Unit;
-import atunit.guice.GAtUnit;
+import atunit.core.AtUnitOptions.Container;
+import atunit.core.AtUnitOptions.Mocks;
 
 import com.google.inject.Binder;
 import com.google.inject.Inject;
@@ -38,18 +40,15 @@ import com.google.inject.name.Names;
 
 
 /**
- * GAtUnit augments {@link AtUnit} tests with full Guice injection. The only
- * additional requirement is that your fields must be annotated with
- * {@link Inject}, including fields which PopQuiz would normally inject for you
- * without Guice.
- * 
- * Your test does not have to implement {@link Module}, but if it does the
- * bindings it configures will be used.
- * 
+ * This example shows the full power of AtUnit.  Mock objects are supplied by JMock,
+ * just as in {@link ExampleJMockTest}.  Dependency injection is provided by Guice,
+ * just as in ExampleGuiceTest.
+ *
  * @author Logan Johnson <logan.johnson@gmail.com>
  */
-@RunWith(GAtUnit.class)
-public class GAtUnitExampleTests implements Module {
+@RunWith(AtUnit.class)
+@AtUnitOptions(mocks=Mocks.JMOCK,container=Container.GUICE)
+public class ExampleGuiceAndJMockTest implements Module {
 	
 	@Inject JUnit4Mockery mockery;
 	@Inject @Mock ExampleInterface myMock;
@@ -61,6 +60,7 @@ public class GAtUnitExampleTests implements Module {
 		b.bind(String.class).annotatedWith(Names.named("field")).toInstance("hooray");
 		b.bind(String.class).annotatedWith(Names.named("non-field")).toInstance("yippee");
 	}
+	
 	
 	@Test
 	public void tInjection() {

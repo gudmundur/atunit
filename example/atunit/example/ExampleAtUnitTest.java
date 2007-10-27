@@ -14,13 +14,15 @@
  * limitations under the License.
  */
 
-package atunit.core;
+package atunit.example;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertTrue;
 
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.jmock.integration.junit4.JUnit4Mockery;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -31,16 +33,12 @@ import atunit.core.Unit;
 
 
 /**
- * AtUnit streamlines and guides the writing of JUnit and JMock tests by
- * getting rid of tedious boilerplate code and enforcing good testing habits.
- * This example test demonstrates the use of AtUnit to declare the subject of
- * your test and easily obtain mock objects.
- * 
- * @author Logan Johnson <logan.johnson@gmail.com>
- * 
+ * This example shows AtUnit at its most basic:  No mocks, no container.
+ * @author logan
+ *
  */
 @RunWith(AtUnit.class)
-public class AtUnitExampleTests {
+public class ExampleAtUnitTest {
 
 	/**
 	 * You must have exactly one field annotated with {@link Unit}. This is the
@@ -49,34 +47,14 @@ public class AtUnitExampleTests {
 	 */
 	@Unit String unit;
 
-	/**
-	 * If you want to use JMock, you may declare exactly one {@link Mockery}.
-	 * Any fields you then annotate with {@link Mock} will be automatically set
-	 * with mocks.
-	 */
-	JUnit4Mockery mockery;
-
-	/**
-	 * Fields annotated with {@link Mock} are dynamically mocked and injected;
-	 * just declare and you're done. This only works if you've declared a
-	 * {@link Mockery}; if you haven't, an exception will be thrown.
-	 */
-	@Mock ExampleInterface myMock;
-
+	@Before
+	public void setUp() {
+		unit = "set";
+	}
 	
 	@Test
-	public void exampleTest() {
-		mockery.checking(new Expectations() {
-			{
-				one(myMock).isAwesome();
-				will(returnValue(true));
-			}
-		});
+	public void testUnit() {
+		assertEquals("set", unit);
+	}
 
-		assertTrue(myMock.isAwesome());
-	}
-	
-	public static interface ExampleInterface {
-		boolean isAwesome();
-	}
 }

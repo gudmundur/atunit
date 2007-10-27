@@ -14,31 +14,22 @@
  * limitations under the License.
  */
 
-package atunit.guice;
+package atunit.core;
 
-import static org.junit.Assert.*;
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.JUnitCore;
-import org.junit.runner.Result;
+public class NoMockFramework implements MockFramework {
 
-public class GAtUnitTests {
-	
-	JUnitCore junit;
-	
-	@Before
-	public void setUp() {
-		junit = new JUnitCore();
-		
+	public Map<Field, Object> getValues(Field[] fields) throws Exception {
+		for ( Field field : fields ) {
+			if ( field.getAnnotation(Mock.class) != null ) {
+				throw new IllegalAnnotationException(Mock.class, "No mock framework specified with @AtUnitOptions");
+			}
+		}
+
+		return new HashMap<Field,Object>();
 	}
-	
-	@Test
-	public void tEverything() {
-		Result result = junit.run(GAtUnitExampleTests.class);
-		assertTrue(result.wasSuccessful());
-		assertEquals(1, result.getRunCount());
-	}
-	
 
 }

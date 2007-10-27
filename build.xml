@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="popquiz" default="jar">
+<project name="atunit" default="jar">
 	
 	<property name="version" value="0.1"/>
     
 	<property name="build.dir" value="${basedir}/build"/>
 	<property name="src.dir" value="${basedir}/src"/>
+	<property name="example.dir" value="${basedir}/example"/>
 	<property name="test.dir" value="${basedir}/test"/>
 	<property name="lib.dir" value="${basedir}/lib"/>
 	
@@ -17,7 +18,10 @@
         <mkdir dir="${build.dir}/classes"/>
     	<mkdir dir="${build.dir}/testclasses"/>
     	<javac srcdir="${src.dir}" debug="on" destdir="${build.dir}/classes">
-    	      <classpath refid="compile.classpath"/>
+    		<classpath refid="compile.classpath"/>
+    	</javac>
+    	<javac srcdir="${example.dir}" debug="on" destdir="${build.dir}/classes">
+    		<classpath refid="compile.classpath"/>
     	</javac>
     	<javac srcdir="${test.dir}" debug="on" destdir="${build.dir}/testclasses">
     		<classpath refid="compile.classpath"/>
@@ -25,8 +29,7 @@
     </target>
 
 	<target name="jar" depends="compile,test" description="package into jars">
-		<jar destfile="${build.dir}/${ant.project.name}-core.jar" basedir="${build.dir}/classes" includes="**/core/**"/>
-		<jar destfile="${build.dir}/${ant.project.name}-guice.jar" basedir="${build.dir}/classes" includes="**/guice/**"/>
+		<jar destfile="${build.dir}/${ant.project.name}-${version}.jar" basedir="${build.dir}/classes"/>
 	</target>
 	
 	<target name="test" depends="compile" description="execute unit tests">
@@ -39,6 +42,9 @@
 				<path location="${build.dir}/testclasses"/>
 			</classpath>
 			<batchtest todir="${build.dir}/testoutput">
+				<fileset dir="${example.dir}">
+					<include name="**/*Test*.java"/>
+				</fileset>
 				<fileset dir="${test.dir}">
 					<include name="**/*Test*.java"/>
 				</fileset>

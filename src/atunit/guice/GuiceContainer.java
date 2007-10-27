@@ -19,30 +19,16 @@ package atunit.guice;
 import java.lang.reflect.Field;
 import java.util.Map;
 
-import org.jmock.Expectations;
-import org.jmock.Mockery;
-import org.junit.internal.runners.InitializationError;
-
-
-import atunit.core.AtUnit;
-
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 
+import atunit.core.Container;
 
-public class GAtUnit extends AtUnit {
+public class GuiceContainer implements Container {
 
-	public GAtUnit(Class<?> testClass) throws InitializationError {
-		super(testClass);
-	}
-
-	@Override
-	protected Object createTest(Class<?> testClass,
-			Map<Field, Object> fieldValues, Mockery mockery,
-			Expectations expectations) throws InstantiationException,
-			IllegalAccessException {
+	public Object createTest(Class<?> testClass, Map<Field, Object> fieldValues) throws Exception {
 		
 		FieldModule fields = new FieldModule(fieldValues);
 		
@@ -52,14 +38,9 @@ public class GAtUnit extends AtUnit {
 		} else {
 			injector = Guice.createInjector(fields);
 		}
-		
-		for ( Field field : fieldValues.keySet() ) {
-			if ( Mockery.class.isAssignableFrom(field.getType())) {
-				((Mockery)injector.getInstance(field.getType())).checking(expectations);
-			}
-		}
 		return injector.getInstance(testClass);
 	}
+	
 	
 	protected class FieldModule extends AbstractModule {
 		final Map<Field,Object> fields;
@@ -79,5 +60,4 @@ public class GAtUnit extends AtUnit {
 		
 	}
 
-	
 }
