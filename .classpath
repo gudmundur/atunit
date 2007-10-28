@@ -11,5 +11,7 @@
 	<classpathentry kind="lib" path="lib/core/junit/junit.jar"/>
 	<classpathentry kind="lib" path="lib/guice/guice/aopalliance.jar"/>
 	<classpathentry kind="lib" path="lib/guice/guice/guice.jar"/>
+	<classpathentry kind="lib" path="lib/easymock/easymock.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

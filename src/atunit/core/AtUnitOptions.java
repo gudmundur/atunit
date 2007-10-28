@@ -40,7 +40,8 @@ public @interface AtUnitOptions {
 	
 	public static enum Mocks {
 		NONE,
-		JMOCK
+		JMOCK,
+		EASYMOCK
 	}
 	
 }

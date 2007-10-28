@@ -24,6 +24,7 @@ import java.util.Map;
 import org.junit.internal.runners.InitializationError;
 import org.junit.internal.runners.JUnit4ClassRunner;
 
+import atunit.easymock.EasyMockFramework;
 import atunit.guice.GuiceContainer;
 import atunit.jmock.JMockFramework;
 
@@ -86,9 +87,11 @@ public class AtUnit extends JUnit4ClassRunner {
 		
 		if ( AtUnitOptions.Mocks.JMOCK.equals(mocksOption) ) {
 			mockFrameworkClass = JMockFramework.class;
+		} else if ( AtUnitOptions.Mocks.EASYMOCK.equals(mocksOption) ) {
+			mockFrameworkClass = EasyMockFramework.class;
 		}
 		
-		if ( (options != null) && (mockFrameworkClassOption != NoMockFramework.class) && (mockFrameworkClass != mockFrameworkClass) ) {
+		if ( (options != null) && (mockFrameworkClassOption != NoMockFramework.class) && (mockFrameworkClassOption != mockFrameworkClass) ) {
 			if ( mockFrameworkClass != NoMockFramework.class ) {
 				throw new OptionsException("Options 'mocks' and 'mockFrameworkClass' conflict");
 			}
