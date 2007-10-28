@@ -25,6 +25,7 @@ import java.util.Set;
 
 import org.jmock.Expectations;
 import org.jmock.Mockery;
+import org.jmock.integration.junit4.JUnit4Mockery;
 
 import atunit.core.IncompatibleAnnotationException;
 import atunit.core.Mock;
@@ -42,7 +43,12 @@ public class JMockFramework implements MockFramework {
 			if ( Mockery.class.isAssignableFrom(field.getType())) {
 				if ( field.getAnnotation(Mock.class) != null )
 					throw new IncompatibleAnnotationException(Mock.class, field.getType());
-				mockery = (Mockery)field.getType().newInstance();
+				
+				if ( Mockery.class.equals(field.getType())) {
+					mockery = new JUnit4Mockery();
+				} else {
+					mockery = (Mockery)field.getType().newInstance();
+				}
 				jmockFields.put(field, mockery);
 				break;
 			}
@@ -78,7 +84,6 @@ public class JMockFramework implements MockFramework {
 		if ( !ignored.isEmpty() ) {
 			Expectations expectations = new Expectations() {{
 				for ( Object mock : ignored ) {
-					System.out.println("ignoring " + mock);
 					ignoring(mock);
 				}
 			}};

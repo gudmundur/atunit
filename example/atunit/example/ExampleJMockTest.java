@@ -20,7 +20,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.jmock.Expectations;
 import org.jmock.Mockery;
-import org.jmock.integration.junit4.JUnit4Mockery;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,9 +43,9 @@ import atunit.core.AtUnitOptions.Mocks;
 public class ExampleJMockTest {
 	
 	/**
-	 * You must declare exactly one field whose type implements {@link Mockery}.
+	 * You must declare exactly one field of type (or assignable from type) {@link Mockery}.
 	 */
-	JUnit4Mockery mockery;
+	Mockery mockery;
 
 	/**
 	 * Fields annotated with {@link Mock} are dynamically mocked and injected.

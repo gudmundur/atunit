@@ -17,7 +17,6 @@
 package atunit.core;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
 
 @SuppressWarnings("serial")
 public class IllegalAnnotationException extends Exception {

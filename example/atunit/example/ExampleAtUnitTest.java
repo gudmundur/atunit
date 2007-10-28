@@ -17,16 +17,11 @@
 package atunit.example;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertTrue;
 
-import org.jmock.Expectations;
-import org.jmock.Mockery;
-import org.jmock.integration.junit4.JUnit4Mockery;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import atunit.core.Mock;
 import atunit.core.AtUnit;
 import atunit.core.Unit;
 

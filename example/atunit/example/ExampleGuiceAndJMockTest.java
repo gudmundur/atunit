@@ -19,7 +19,7 @@ package atunit.example;
 import static org.junit.Assert.*;
 
 import org.jmock.Expectations;
-import org.jmock.integration.junit4.JUnit4Mockery;
+import org.jmock.Mockery;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -50,7 +50,7 @@ import com.google.inject.name.Names;
 @AtUnitOptions(mocks=Mocks.JMOCK,container=Container.GUICE)
 public class ExampleGuiceAndJMockTest implements Module {
 	
-	@Inject JUnit4Mockery mockery;
+	@Inject Mockery mockery;
 	@Inject @Mock ExampleInterface myMock;
 	@Inject @Mock(ignored=true) IgnoredInterface ignored;
 	@Inject @Named("field") String setting;

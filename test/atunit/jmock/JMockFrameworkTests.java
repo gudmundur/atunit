@@ -22,7 +22,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.jmock.Expectations;
 import org.jmock.Mockery;
-import org.jmock.integration.junit4.JUnit4Mockery;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.JUnitCore;
@@ -93,7 +92,7 @@ public class JMockFrameworkTests {
 		}
 		
 		public static class WithMockery extends AbstractJMockTest {
-			JUnit4Mockery mockery;
+			Mockery mockery;
 			@Unit String unit;
 			@Mock ExampleInterface myMock;
 			
@@ -119,7 +118,7 @@ public class JMockFrameworkTests {
 		}
 		
 		public static class MockeryUnit extends AbstractJMockTest {
-			@Unit JUnit4Mockery mockery;
+			@Unit Mockery mockery;
 			public MockeryUnit() {}
 		}
 		
