@@ -24,24 +24,22 @@ import org.easymock.EasyMock;
 
 import atunit.core.Mock;
 import atunit.core.MockFramework;
+import atunit.core.Stub;
 
 public class EasyMockFramework implements MockFramework {
 
 	public Map<Field, Object> getValues(Field[] fields) throws Exception {
-		Map<Field,Object> mocks = new HashMap<Field,Object>();
+		Map<Field,Object> mocksAndStubs = new HashMap<Field,Object>();
 	
 		for ( Field field : fields ) {
-			Mock anno = field.getAnnotation(Mock.class);
-			if ( anno != null ) {
-				if ( anno.ignored() == true ) {
-					mocks.put(field, EasyMock.createNiceMock(field.getType()));
-				} else {
-					mocks.put(field, EasyMock.createStrictMock(field.getType()));
-				}
+			if ( field.getAnnotation(Mock.class) != null ) {
+				mocksAndStubs.put(field, EasyMock.createStrictMock(field.getType()));
+			} else if ( field.getAnnotation(Stub.class) != null ) {
+				mocksAndStubs.put(field, EasyMock.createNiceMock(field.getType()));
 			}
 		}
 		
-		return mocks;
+		return mocksAndStubs;
 	}
 
 }

@@ -28,6 +28,7 @@ import org.junit.runner.RunWith;
 import atunit.core.AtUnitOptions;
 import atunit.core.Mock;
 import atunit.core.AtUnit;
+import atunit.core.Stub;
 import atunit.core.Unit;
 import atunit.core.AtUnitOptions.Container;
 import atunit.core.AtUnitOptions.Mocks;
@@ -52,7 +53,7 @@ public class ExampleGuiceAndJMockTest implements Module {
 	
 	@Inject Mockery mockery;
 	@Inject @Mock ExampleInterface myMock;
-	@Inject @Mock(ignored=true) IgnoredInterface ignored;
+	@Inject @Stub IgnoredInterface ignored;
 	@Inject @Named("field") String setting;
 	@Inject @Unit ExampleClass myUnit;
 

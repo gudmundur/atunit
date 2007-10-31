@@ -30,6 +30,7 @@ import org.jmock.integration.junit4.JUnit4Mockery;
 import atunit.core.IncompatibleAnnotationException;
 import atunit.core.Mock;
 import atunit.core.MockFramework;
+import atunit.core.Stub;
 
 public class JMockFramework implements MockFramework {
 
@@ -55,16 +56,17 @@ public class JMockFramework implements MockFramework {
 		}
 		
 		for ( Field field : fields ) {
-			Mock mockAnnotation = field.getAnnotation(Mock.class);
-			if ( mockAnnotation == null ) continue;
-			if ( mockery == null ) throw new NoMockeryException();
+			boolean isMock = (field.getAnnotation(Mock.class) != null);
+			boolean isStub = (field.getAnnotation(Stub.class) != null);
+			if ( !isMock && !isStub ) continue;
+			if ( isMock && (mockery == null) ) throw new NoMockeryException();
 			
 			Class<?> fieldType = field.getType();
 			if ( fieldType.isArray() ) {
 				Object[] array = (Object[])Array.newInstance(fieldType.getComponentType(), 3);
 				for ( int i = 0; i < array.length; i++ ) {
 					array[i] = mockery.mock(fieldType.getComponentType());
-					if ( mockAnnotation.ignored() ) {
+					if ( isStub ) {
 						ignored.add(array[i]);
 					}
 				}
@@ -72,7 +74,7 @@ public class JMockFramework implements MockFramework {
 				
 			} else {
 				Object mock = mockery.mock(field.getType());
-				if ( mockAnnotation.ignored() ) {
+				if ( isStub ) {
 					ignored.add(mock);
 				}
 				
