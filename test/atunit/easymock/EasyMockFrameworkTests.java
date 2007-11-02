@@ -26,9 +26,9 @@ import org.junit.runner.Result;
 import org.junit.runner.RunWith;
 
 import atunit.AtUnit;
+import atunit.Mock;
 import atunit.MockFramework;
 import atunit.Unit;
-import atunit.core.Mock;
 
 public class EasyMockFrameworkTests {
 	

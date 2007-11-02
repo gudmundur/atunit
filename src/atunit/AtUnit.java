@@ -26,7 +26,6 @@ import org.junit.internal.runners.JUnit4ClassRunner;
 
 import atunit.core.Container;
 import atunit.core.IncompatibleAnnotationException;
-import atunit.core.Mock;
 import atunit.core.MockFramework;
 import atunit.core.NoContainer;
 import atunit.core.NoMockFramework;

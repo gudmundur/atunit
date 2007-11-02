@@ -25,9 +25,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import atunit.AtUnit;
+import atunit.Mock;
 import atunit.MockFramework;
 import atunit.Unit;
-import atunit.core.Mock;
 
 /**
  * This example shows AtUnit's JMock integration, with no container.

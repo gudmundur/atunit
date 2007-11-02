@@ -25,9 +25,9 @@ import org.junit.runner.RunWith;
 
 
 
-import atunit.core.Mock;
 import atunit.AtUnit;
 import atunit.Container;
+import atunit.Mock;
 import atunit.MockFramework;
 import atunit.Stub;
 import atunit.Unit;

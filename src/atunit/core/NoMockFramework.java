@@ -20,6 +20,8 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
+import atunit.Mock;
+
 public class NoMockFramework implements MockFramework {
 
 	public Map<Field, Object> getValues(Field[] fields) throws Exception {

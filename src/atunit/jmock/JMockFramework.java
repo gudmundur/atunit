@@ -27,9 +27,9 @@ import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.jmock.integration.junit4.JUnit4Mockery;
 
+import atunit.Mock;
 import atunit.Stub;
 import atunit.core.IncompatibleAnnotationException;
-import atunit.core.Mock;
 import atunit.core.MockFramework;
 
 public class JMockFramework implements MockFramework {

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package atunit.core;
+package atunit;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
