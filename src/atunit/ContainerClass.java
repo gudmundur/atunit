@@ -24,7 +24,7 @@ import java.lang.annotation.Target;
 import atunit.core.Container;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.FIELD})
+@Target({ElementType.TYPE})
 public @interface ContainerClass {
 	
 	Class<? extends Container> value();

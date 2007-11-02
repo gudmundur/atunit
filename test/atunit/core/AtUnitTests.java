@@ -25,6 +25,8 @@ import org.junit.runner.Result;
 import org.junit.runner.RunWith;
 
 import atunit.AtUnit;
+import atunit.ContainerClass;
+import atunit.MockFrameworkClass;
 import atunit.Unit;
 
 
@@ -40,6 +42,13 @@ public class AtUnitTests {
 	@Test
 	public void tHappyTest() {
 		Result result = junit.run(TestClasses.HappyTest.class);
+		assertTrue(result.wasSuccessful());
+		assertEquals(1, result.getRunCount());
+	}
+	
+	@Test
+	public void tClassAnnotations() {
+		Result result = junit.run(TestClasses.ClassAnnotationsTest.class);
 		assertTrue(result.wasSuccessful());
 		assertEquals(1, result.getRunCount());
 	}
@@ -65,6 +74,16 @@ public class AtUnitTests {
 			@Test
 			public void tPass() {
 				assertTrue(true);
+			}
+		}
+		
+		@RunWith(AtUnit.class)
+		@MockFrameworkClass(NoMockFramework.class)
+		@ContainerClass(NoContainer.class)
+		public static class ClassAnnotationsTest {
+			@Unit String unit;
+			@Test
+			public void tPass() {
 			}
 		}
 		

@@ -24,7 +24,7 @@ import java.lang.annotation.Target;
 import atunit.core.MockFramework;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.FIELD})
+@Target({ElementType.TYPE})
 public @interface MockFrameworkClass {
 	
 	Class<? extends MockFramework> value();
