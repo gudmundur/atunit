@@ -25,7 +25,7 @@ public class NoMockFramework implements MockFramework {
 	public Map<Field, Object> getValues(Field[] fields) throws Exception {
 		for ( Field field : fields ) {
 			if ( field.getAnnotation(Mock.class) != null ) {
-				throw new IllegalAnnotationException(Mock.class, "No mock framework specified with @AtUnitOptions");
+				throw new IllegalAnnotationException(Mock.class, "No mock framework specified with @MockFramework or @MockFrameworkClass");
 			}
 		}
 

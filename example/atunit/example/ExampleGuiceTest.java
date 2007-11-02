@@ -21,10 +21,9 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import atunit.core.AtUnit;
-import atunit.core.AtUnitOptions;
-import atunit.core.Unit;
-import atunit.core.AtUnitOptions.Container;
+import atunit.AtUnit;
+import atunit.Container;
+import atunit.Unit;
 
 import com.google.inject.Binder;
 import com.google.inject.Inject;
@@ -35,7 +34,7 @@ import com.google.inject.name.Names;
 /**
  * This example demonstrates AtUnit's Guice integration.
  * 
- * Note the AtUnitOptions annotation which tells AtUnit to use Guice.
+ * Note the Container annotation which tells AtUnit to use Guice.
  * 
  * Fields are fully injected by Guice, and are themselves injected into your
  * test. Your test does not have to implement Module, but if it does the
@@ -43,7 +42,7 @@ import com.google.inject.name.Names;
  * 
  */
 @RunWith(AtUnit.class)
-@AtUnitOptions(container=Container.GUICE)
+@Container(Container.Option.GUICE)
 public class ExampleGuiceTest implements Module {
 
 	@Inject @Unit InjectedStringHolder holder;

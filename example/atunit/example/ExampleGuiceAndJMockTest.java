@@ -25,13 +25,12 @@ import org.junit.runner.RunWith;
 
 
 
-import atunit.core.AtUnitOptions;
 import atunit.core.Mock;
-import atunit.core.AtUnit;
-import atunit.core.Stub;
-import atunit.core.Unit;
-import atunit.core.AtUnitOptions.Container;
-import atunit.core.AtUnitOptions.Mocks;
+import atunit.AtUnit;
+import atunit.Container;
+import atunit.MockFramework;
+import atunit.Stub;
+import atunit.Unit;
 
 import com.google.inject.Binder;
 import com.google.inject.Inject;
@@ -48,7 +47,8 @@ import com.google.inject.name.Names;
  * @author Logan Johnson <logan.johnson@gmail.com>
  */
 @RunWith(AtUnit.class)
-@AtUnitOptions(mocks=Mocks.JMOCK,container=Container.GUICE)
+@Container(Container.Option.GUICE)
+@MockFramework(MockFramework.Option.JMOCK)
 public class ExampleGuiceAndJMockTest implements Module {
 	
 	@Inject Mockery mockery;

@@ -24,22 +24,20 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import atunit.core.AtUnit;
-import atunit.core.AtUnitOptions;
+import atunit.AtUnit;
+import atunit.MockFramework;
+import atunit.Unit;
 import atunit.core.Mock;
-import atunit.core.Unit;
-import atunit.core.AtUnitOptions.Mocks;
 
 /**
  * This example shows AtUnit's JMock integration, with no container.
  * 
- * Notice the AtUnitOptions annotation on this class. The parameter 'mocks' sets
- * the mock framework you want AtUnit to use.
+ * Note the MockFramework annotation which tells AtUnit to use JMock.
  * 
  * @author Logan Johnson <logan.johnson@gmail.com>
  */
 @RunWith(AtUnit.class)
-@AtUnitOptions(mocks = Mocks.JMOCK)
+@MockFramework(MockFramework.Option.JMOCK)
 public class ExampleJMockTest {
 	
 	/**

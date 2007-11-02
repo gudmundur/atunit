@@ -24,7 +24,8 @@ import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.RunWith;
 
-import atunit.core.AtUnit;
+import atunit.AtUnit;
+import atunit.Unit;
 
 
 public class AtUnitTests {

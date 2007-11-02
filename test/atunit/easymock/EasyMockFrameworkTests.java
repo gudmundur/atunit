@@ -25,12 +25,10 @@ import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.RunWith;
 
-import atunit.core.AtUnit;
-import atunit.core.AtUnitOptions;
+import atunit.AtUnit;
+import atunit.MockFramework;
+import atunit.Unit;
 import atunit.core.Mock;
-import atunit.core.Unit;
-import atunit.core.AtUnitOptions.Mocks;
-
 
 public class EasyMockFrameworkTests {
 	
@@ -58,7 +56,7 @@ public class EasyMockFrameworkTests {
 	protected static class TestClasses {
 		
 		@RunWith(AtUnit.class)
-		@AtUnitOptions(mocks=Mocks.EASYMOCK)
+		@MockFramework(MockFramework.Option.EASYMOCK)
 		public static class OptionMocks {
 			@Unit protected String unit;
 			@Mock protected StringFactory stringFactory;
@@ -79,7 +77,7 @@ public class EasyMockFrameworkTests {
 		}
 
 		@RunWith(AtUnit.class)
-		@AtUnitOptions(mockFrameworkClass=EasyMockFramework.class)
+		@MockFramework(MockFramework.Option.EASYMOCK)
 		public static class OptionMockFrameworkClass {
 			@Unit protected String unit;
 			@Mock protected StringFactory stringFactory;

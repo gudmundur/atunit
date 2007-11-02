@@ -28,12 +28,11 @@ import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.RunWith;
 
-import atunit.core.AtUnit;
-import atunit.core.AtUnitOptions;
+import atunit.AtUnit;
+import atunit.MockFramework;
+import atunit.Unit;
 import atunit.core.IncompatibleAnnotationException;
 import atunit.core.Mock;
-import atunit.core.Unit;
-import atunit.core.AtUnitOptions.Mocks;
 
 public class JMockFrameworkTests {
 	
@@ -82,7 +81,7 @@ public class JMockFrameworkTests {
 			}
 		}
 		
-		@AtUnitOptions(mocks=Mocks.JMOCK)
+		@MockFramework(MockFramework.Option.JMOCK)
 		public static abstract class AbstractJMockTest extends AbstractAtUnitTest  {
 			
 		}

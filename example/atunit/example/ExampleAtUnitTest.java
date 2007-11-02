@@ -22,8 +22,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import atunit.core.AtUnit;
-import atunit.core.Unit;
+import atunit.AtUnit;
+import atunit.Unit;
 
 
 

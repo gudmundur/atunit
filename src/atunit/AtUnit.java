@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package atunit.core;
+package atunit;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -24,6 +24,12 @@ import java.util.Map;
 import org.junit.internal.runners.InitializationError;
 import org.junit.internal.runners.JUnit4ClassRunner;
 
+import atunit.core.Container;
+import atunit.core.IncompatibleAnnotationException;
+import atunit.core.Mock;
+import atunit.core.MockFramework;
+import atunit.core.NoContainer;
+import atunit.core.NoMockFramework;
 import atunit.easymock.EasyMockFramework;
 import atunit.guice.GuiceContainer;
 import atunit.jmock.JMockFramework;
@@ -39,9 +45,8 @@ public class AtUnit extends JUnit4ClassRunner {
 	protected Object createTest() throws Exception {
 		Class<?> c = getTestClass().getJavaClass();
 		
-		AtUnitOptions options = c.getAnnotation(AtUnitOptions.class);
-		MockFramework mockFramework = getMockFramework(options);
-		Container container = getContainer(options);
+		Container container = getContainerFor(c);
+		MockFramework mockFramework = getMockFrameworkFor(c);
 				
 		final Map<Field,Object> fieldValues = new HashMap<Field,Object>();
 		
@@ -76,65 +81,52 @@ public class AtUnit extends JUnit4ClassRunner {
 		return unitField;
 	}
 	
-	protected MockFramework getMockFramework(AtUnitOptions options) throws OptionsException {
-		AtUnitOptions.Mocks mocksOption = null;
-		Class<? extends MockFramework> mockFrameworkClassOption = null;
-		Class<? extends MockFramework> mockFrameworkClass = NoMockFramework.class;
-		if ( options != null ) {
-			mocksOption = options.mocks();
-			mockFrameworkClassOption = options.mockFrameworkClass();
-		}
-		
-		if ( AtUnitOptions.Mocks.JMOCK.equals(mocksOption) ) {
-			mockFrameworkClass = JMockFramework.class;
-		} else if ( AtUnitOptions.Mocks.EASYMOCK.equals(mocksOption) ) {
-			mockFrameworkClass = EasyMockFramework.class;
-		}
-		
-		if ( (options != null) && (mockFrameworkClassOption != NoMockFramework.class) && (mockFrameworkClassOption != mockFrameworkClass) ) {
-			if ( mockFrameworkClass != NoMockFramework.class ) {
-				throw new OptionsException("Options 'mocks' and 'mockFrameworkClass' conflict");
-			}
-			mockFrameworkClass = mockFrameworkClassOption;
-		}
-		
-		try {
-			return mockFrameworkClass.newInstance();
-		} catch (Exception e) {
-			throw new OptionsException("Could not instantiate mock framework class", e);
-		}
-		
-	}
 	
-	
-	
-	protected Container getContainer(AtUnitOptions options) throws OptionsException {
-		AtUnitOptions.Container containerOption = null;
-		Class<? extends Container> containerClassOption = null;
+	protected Container getContainerFor(Class<?> testClass) throws Exception {
 		Class<? extends Container> containerClass = NoContainer.class;
-		if ( options != null ) {
-			containerOption = options.container();
-			containerClassOption = options.containerClass();
-		}
 		
-		if ( containerOption == AtUnitOptions.Container.GUICE ) {
-			containerClass = GuiceContainer.class;
-		}
+		atunit.Container containerAnno = testClass.getAnnotation(atunit.Container.class);
+		atunit.ContainerClass containerClassAnno = testClass.getAnnotation(atunit.ContainerClass.class);
 		
-		if ( (options != null) && (containerClassOption != NoContainer.class) && (containerClassOption != containerClass) ) {
-			if ( containerClass != NoContainer.class ) {
-				throw new OptionsException("Options 'container' and 'containerClass' conflict");
+		if ( containerAnno != null && containerClassAnno != null )
+			throw new IncompatibleAnnotationException(atunit.Container.class, atunit.ContainerClass.class);
+
+		if ( containerAnno != null ) {
+			switch ( containerAnno.value() ) {
+				case GUICE: containerClass = GuiceContainer.class;
 			}
-			containerClass = containerClassOption;
 		}
 		
-		try {
-			return containerClass.newInstance();
-		} catch (Exception e) {
-			throw new OptionsException("Could not instantiate container class", e);
+		if ( containerClassAnno != null ) {
+			containerClass = containerClassAnno.value();
 		}
 		
+		return containerClass.newInstance();
 	}
+	
+	protected MockFramework getMockFrameworkFor(Class<?> testClass) throws Exception {
+		Class<? extends MockFramework> mockFrameworkClass = NoMockFramework.class;
+		
+		atunit.MockFramework mockFrameworkAnno = testClass.getAnnotation(atunit.MockFramework.class);
+		atunit.MockFrameworkClass mockFrameworkClassAnno = testClass.getAnnotation(atunit.MockFrameworkClass.class);
+		
+		if ( mockFrameworkAnno != null && mockFrameworkClassAnno != null )
+			throw new IncompatibleAnnotationException(atunit.MockFramework.class, atunit.MockFrameworkClass.class);
+
+		if ( mockFrameworkAnno != null ) {
+			switch ( mockFrameworkAnno.value() ) {
+				case EASYMOCK: mockFrameworkClass = EasyMockFramework.class; break;
+				case JMOCK: mockFrameworkClass = JMockFramework.class; break;
+			}
+		}
+		
+		if ( mockFrameworkClassAnno != null ) {
+			mockFrameworkClass = mockFrameworkClassAnno.value();
+		}
+		
+		return mockFrameworkClass.newInstance();
+	}
+	
 	
 	@SuppressWarnings("serial")
 	public static class NoUnitException extends Exception {

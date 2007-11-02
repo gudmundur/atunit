@@ -22,9 +22,9 @@ import java.util.Map;
 
 import org.easymock.EasyMock;
 
+import atunit.Stub;
 import atunit.core.Mock;
 import atunit.core.MockFramework;
-import atunit.core.Stub;
 
 public class EasyMockFramework implements MockFramework {
 

@@ -23,22 +23,20 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import atunit.core.AtUnit;
-import atunit.core.AtUnitOptions;
+import atunit.AtUnit;
+import atunit.MockFramework;
+import atunit.Unit;
 import atunit.core.Mock;
-import atunit.core.Unit;
-import atunit.core.AtUnitOptions.Mocks;
 
 /**
  * This example demonstrates AtUnit's EasyMock integration.
  * 
- * Notice the AtUnitOptions annotation on this class. The parameter 'mocks' sets
- * the mock framework you want AtUnit to use.
+ * Note the MockFramework annotation which tells AtUnit to use EasyMock.
  * 
  * @author Logan Johnson <logan.johnson@gmail.com>
  */
 @RunWith(AtUnit.class)
-@AtUnitOptions(mocks=Mocks.EASYMOCK)
+@MockFramework(MockFramework.Option.EASYMOCK)
 public class ExampleEasyMockTest {
 
 	@Unit Manager manager;
