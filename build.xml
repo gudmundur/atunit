@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="atunit" default="jar">
 	
-	<property name="version" value="0.4"/>
+	<property name="version" value="0.5"/>
     
 	<property name="build.dir" value="${basedir}/build"/>
 	<property name="src.dir" value="${basedir}/src"/>
