@@ -12,6 +12,11 @@
 	<classpathentry kind="lib" path="lib/jmock/hamcrest-library.jar"/>
 	<classpathentry kind="lib" path="lib/jmock/jmock.jar"/>
 	<classpathentry kind="lib" path="lib/jmock/jmock-junit4.jar"/>
+	<classpathentry kind="lib" path="lib/spring/spring-beans.jar" sourcepath="lib/spring/spring-src.zip"/>
+	<classpathentry kind="lib" path="lib/spring/spring-context.jar" sourcepath="lib/spring/spring-src.zip"/>
+	<classpathentry kind="lib" path="lib/spring/spring-core.jar" sourcepath="lib/spring/spring-src.zip"/>
+	<classpathentry kind="lib" path="lib/spring/log4j-1.2.14.jar"/>
+	<classpathentry kind="lib" path="lib/spring/commons-logging.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

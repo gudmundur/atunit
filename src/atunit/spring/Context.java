@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package atunit;
+package atunit.spring;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
@@ -25,13 +25,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE})
 @Inherited
-public @interface Container {
+public @interface Context {
 	
-	public enum Option {
-		GUICE,
-		SPRING
-	}
-	
-	Option value();
+	String value();
 	
 }

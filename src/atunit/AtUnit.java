@@ -32,6 +32,7 @@ import atunit.core.NoMockFramework;
 import atunit.easymock.EasyMockFramework;
 import atunit.guice.GuiceContainer;
 import atunit.jmock.JMockFramework;
+import atunit.spring.SpringContainer;
 
 public class AtUnit extends JUnit4ClassRunner {
 
@@ -92,7 +93,8 @@ public class AtUnit extends JUnit4ClassRunner {
 
 		if ( containerAnno != null ) {
 			switch ( containerAnno.value() ) {
-				case GUICE: containerClass = GuiceContainer.class;
+				case GUICE: containerClass = GuiceContainer.class; break;
+				case SPRING: containerClass = SpringContainer.class; break;
 			}
 		}
 		

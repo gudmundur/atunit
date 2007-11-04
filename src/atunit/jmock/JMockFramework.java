@@ -60,6 +60,7 @@ public class JMockFramework implements MockFramework {
 			boolean isStub = (field.getAnnotation(Stub.class) != null);
 			if ( !isMock && !isStub ) continue;
 			if ( isMock && (mockery == null) ) throw new NoMockeryException();
+			if ( isStub && (mockery == null) ) mockery = new JUnit4Mockery();
 			
 			Class<?> fieldType = field.getType();
 			if ( fieldType.isArray() ) {
