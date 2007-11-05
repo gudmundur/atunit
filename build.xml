@@ -23,9 +23,15 @@
     	<javac srcdir="${example.dir}" debug="on" destdir="${build.dir}/classes">
     		<classpath refid="compile.classpath"/>
     	</javac>
+    	<copy todir="${build.dir}/testclasses">
+    	    		<fileset dir="${example.dir}" includes="**/*.xml"/>
+    	</copy>
     	<javac srcdir="${test.dir}" debug="on" destdir="${build.dir}/testclasses">
     		<classpath refid="compile.classpath"/>
     	</javac>
+    	<copy todir="${build.dir}/testclasses">
+    		<fileset dir="${test.dir}" includes="**/*.xml"/>
+    	</copy>
     </target>
 
 	<target name="jar" depends="compile,test" description="package into jars">
