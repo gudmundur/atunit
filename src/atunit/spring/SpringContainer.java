@@ -35,7 +35,6 @@ import atunit.core.Container;
 
 public class SpringContainer implements Container {
 
-	@Override
 	public Object createTest(Class<?> testClass, Map<Field, Object> fieldValues) throws Exception {
 		
 		GenericApplicationContext ctx = new GenericApplicationContext();
@@ -147,17 +146,14 @@ public class SpringContainer implements Container {
 			this.instance = instance;
 		}
 		
-		@Override
 		public Object getObject() throws Exception {
 			return instance;
 		}
 
-		@Override
 		public Class<?> getObjectType() {
 			return type;
 		}
 
-		@Override
 		public boolean isSingleton() {
 			return true;
 		}
