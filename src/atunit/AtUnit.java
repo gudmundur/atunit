@@ -48,23 +48,28 @@ public class AtUnit extends JUnit4ClassRunner {
 		Container container = getContainerFor(c);
 		MockFramework mockFramework = getMockFrameworkFor(c);
 				
-		final Map<Field,Object> fieldValues = new HashMap<Field,Object>();
-		
 		// make sure we have one (and only one) @Unit field
 		Field unitField = getUnitField(c);
 		if ( unitField.getAnnotation(Mock.class) != null ) {
 			throw new IncompatibleAnnotationException(Unit.class, Mock.class);
 		}
 		
-		Map<Field,Object> mfValues = mockFramework.getValues(c.getDeclaredFields());
-		if ( mfValues.containsKey(unitField)) {
+		final Map<Field,Object> fieldValues = mockFramework.getValues(c.getDeclaredFields());
+		if ( fieldValues.containsKey(unitField)) {
 			throw new IncompatibleAnnotationException(Unit.class, unitField.getType());
 		}
-		for ( Field field : mfValues.keySet() ) {
-			fieldValues.put(field, mfValues.get(field));
+		
+		Object test = container.createTest(c, fieldValues);
+
+		// any field values created by AtUnit but not injected by the container are injected here.
+		for ( Field field : fieldValues.keySet() ) {
+			field.setAccessible(true);
+			if ( field.get(test) == null ) {
+				field.set(test, fieldValues.get(field));
+			}
 		}
 		
-		return container.createTest(c, fieldValues);
+		return test;
 	}
 
 	protected Field getUnitField(Class<?> testClass) throws NoUnitException, TooManyUnitsException {

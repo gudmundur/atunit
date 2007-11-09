@@ -46,13 +46,12 @@ public class ExampleSpringEasyMockTest {
 	@Bean @Unit SimpleManager manager;
 	
 	/**
-	 * Mocks and Stubs that are also annotated with Bean will be placed into the application context like
-	 * any other bean.  If a name is specified, it will be used.  If no name is specified, one will be generated.
-	 * Mock or Stub Beans are candidates for autowiring by type.
+	 * Mocks and Stubs are automatically placed into the application context
+	 * like any other bean. If you also annotate them with Bean, you can give
+	 * them a bean name which will be used in the context.
 	 * 
-	 * In other words:  Declare a Mock or Stub field, annotate it with Bean, and it's just like you've put it
-	 * in the XML.
-	 * 
+	 * In other words: Declare a Mock or Stub field, and it's just like you've
+	 * put it in the XML.
 	 */
 	@Bean("daoBean") @Mock SimpleDao dao;
 

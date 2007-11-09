@@ -22,12 +22,7 @@ import java.util.Map;
 public class NoContainer implements Container {
 
 	public Object createTest(Class<?> testClass, Map<Field, Object> fieldValues) throws Exception {
-		Object testInstance = testClass.newInstance();
-		for ( Field field : fieldValues.keySet() ) {
-			field.setAccessible(true); // take that, security!
-			field.set(testInstance, fieldValues.get(field));
-		}
-		return testInstance;
+		return testClass.newInstance();
 	}
 
 }

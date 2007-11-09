@@ -42,11 +42,10 @@ public class SpringContainer implements Container {
 		for ( Field field : fieldValues.keySet() ) {
 			
 			Bean beanAnno = field.getAnnotation(Bean.class);
-			if ( beanAnno == null ) continue;
 			
 			AbstractBeanDefinition beandef = defineInstanceHolderFactoryBean(field.getType(), fieldValues.get(field));
 			
-			if (!beanAnno.value().equals("")) {
+			if ((beanAnno != null) && !beanAnno.value().equals("")) {
 				ctx.registerBeanDefinition(beanAnno.value(), beandef);
 			} else {
 				BeanDefinitionReaderUtils.registerWithGeneratedName(beandef, ctx);

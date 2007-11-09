@@ -40,10 +40,14 @@ import com.google.inject.name.Names;
 
 
 /**
- * This example shows the full power of AtUnit.  Mock objects are supplied by JMock,
- * just as in {@link ExampleJMockTest}.  Dependency injection is provided by Guice,
- * just as in ExampleGuiceTest.
- *
+ * This example shows the full power of AtUnit. Mock objects are supplied by
+ * JMock, just as in {@link ExampleJMockTest}. Dependency injection is provided
+ * by Guice, just as in ExampleGuiceTest.
+ * 
+ * Any fields created by the MockFramework and not injected by the Container
+ * will be injected by AtUnit itself, so there's usually no need to use Guice
+ * annotations on your Mockery, mocks, or stubs.
+ * 
  * @author Logan Johnson <logan.johnson@gmail.com>
  */
 @RunWith(AtUnit.class)
@@ -51,11 +55,14 @@ import com.google.inject.name.Names;
 @MockFramework(MockFramework.Option.JMOCK)
 public class ExampleGuiceAndJMockTest implements Module {
 	
-	@Inject Mockery mockery;
-	@Inject @Mock ExampleInterface myMock;
-	@Inject @Stub IgnoredInterface ignored;
-	@Inject @Named("field") String setting;
 	@Inject @Unit ExampleClass myUnit;
+	
+	Mockery mockery;
+	@Mock ExampleInterface myMock;
+	@Stub IgnoredInterface ignored;
+	
+	@Inject @Named("field") String setting;
+	
 
 	public void configure(Binder b) {
 		b.bind(String.class).annotatedWith(Names.named("field")).toInstance("hooray");
