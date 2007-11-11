@@ -1,18 +1,3 @@
-/**
- * Copyright (C) 2007 Logan Johnson
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 
 package atunit.example;
 
@@ -23,100 +8,60 @@ import org.jmock.Mockery;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import atunit.*;
+import atunit.example.subjects.*;
 
-
-import atunit.AtUnit;
-import atunit.Container;
-import atunit.Mock;
-import atunit.MockFramework;
-import atunit.Stub;
-import atunit.Unit;
-
-import com.google.inject.Binder;
 import com.google.inject.Inject;
-import com.google.inject.Module;
-import com.google.inject.name.Named;
-import com.google.inject.name.Names;
 
 
 /**
- * This example shows the full power of AtUnit. Mock objects are supplied by
- * JMock, just as in {@link ExampleJMockTest}. Dependency injection is provided
- * by Guice, just as in ExampleGuiceTest.
+ * This example demonstrates the combined integration of Guice and JMock. The
+ * combined integration of a mock framework and a dependency injection container
+ * is where AtUnit really shines, because it allows you to simply declare some
+ * fields and start testing.
  * 
- * Any fields created by the MockFramework and not injected by the Container
- * will be injected by AtUnit itself, so there's usually no need to use Guice
- * annotations on your Mockery, mocks, or stubs.
+ * See ExampleGuiceTest and ExampleJMockTest for introductions to AtUnit's Guice
+ * and JMock support.
  * 
- * @author Logan Johnson <logan.johnson@gmail.com>
+ * Please note also that any Container and MockFramework can be used together.
+ * 
  */
 @RunWith(AtUnit.class)
 @Container(Container.Option.GUICE)
 @MockFramework(MockFramework.Option.JMOCK)
-public class ExampleGuiceAndJMockTest implements Module {
-	
-	@Inject @Unit ExampleClass myUnit;
-	
-	Mockery mockery;
-	@Mock ExampleInterface myMock;
-	@Stub IgnoredInterface ignored;
-	
-	@Inject @Named("field") String setting;
-	
+public class ExampleGuiceAndJMockTest {
 
-	public void configure(Binder b) {
-		b.bind(String.class).annotatedWith(Names.named("field")).toInstance("hooray");
-		b.bind(String.class).annotatedWith(Names.named("non-field")).toInstance("yippee");
-	}
+	@Inject @Unit GuiceUserManager manager;
+	@Inject User emptyUser;
 	
+	/*
+	 * Just as it does when no Container is used, AtUnit creates the Mockery and
+	 * uses JMock to create any @Mock or @Stub fields. However, once they're
+	 * created, AtUnit binds them into the Guice injector so that Guice can
+	 * inject them anywhere they're needed.
+	 * 
+	 * Since AtUnit creates these fields, you have two choices: You can mark
+	 * them with @Inject, in which case they will be directly injected by Guice
+	 * like any other field; or you can forego @Inject and AtUnit will set them
+	 * after Guice is finished. Since you very rarely need the full power of
+	 * Guice when actually setting these kinds of fields, you can usually do
+	 * without @Inject on them.
+	 * 
+	 */
+	Mockery mockery;
+	@Mock UserDao dao;
+	@Stub Logger ignoredLogger;
+
 	
 	@Test
-	public void tInjection() {
+	public void testGetUser() {
 
-		// verify that the injected Mockery works
 		mockery.checking(new Expectations() {{ 
-			one (myMock).isAwesome();
-				will(returnValue(true));
+			one (dao).load(with(equal(500)));
+				will(returnValue(emptyUser));
 		}});
-		assertTrue(myMock.isAwesome());
 		
-		// verify that bindings from test class module are set
-		assertEquals("hooray", setting);
-		
-		// verify that injection happens between fields
-		assertSame(myMock, myUnit.getFace());
-		
-		// verify that injection happens between fields and non-field bindings
-		assertEquals("yippee", myUnit.getString());
-		
-		// verify that annotation-driven expectations (currently just 'ignored=true') are respected
-		ignored.failIfNotIgnored();
+		assertSame(emptyUser, manager.getUser(500));
 	}
 	
-	
-	public static interface IgnoredInterface {
-		public void failIfNotIgnored();
-	}
-	
-	public static class ExampleClass {
-		
-		final ExampleInterface face;
-		final String string;
-		
-		@Inject
-		public ExampleClass(ExampleInterface face, @Named("non-field") String string) {
-			this.face = face;
-			this.string = string;
-		}
-		public ExampleInterface getFace() {
-			return face;
-		}
-		public String getString() {
-			return string;
-		}
-	}
-	
-	public static interface ExampleInterface {
-		boolean isAwesome();
-	}
 }

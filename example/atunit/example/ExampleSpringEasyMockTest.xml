@@ -3,9 +3,14 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
 
-
-  <bean id="mgr" class="atunit.example.ExampleSpringEasyMockTest$SimpleManager">
-	<property name="dao" ref="daoBean"/>  <!--  daoBean is a Mock, defined in the test class and imported here -->
+  <bean id="userManager" class="atunit.example.subjects.UserManagerImpl">
+  	<constructor-arg ref="log"/>
+  	<property name="userDao" ref="userDao"/>
   </bean>
-
+  
+  <bean id="fred" class="atunit.example.subjects.User">
+  	<property name="id" value="500"/>
+  	<property name="username" value="fred"/>
+  </bean>
+  
 </beans>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="atunit" default="jar">
+<project name="atunit" default="dist">
 	
 	<property name="version" value="0.6"/>
 	
@@ -37,10 +37,44 @@
     		<fileset dir="${test.dir}" includes="**/*.xml"/>
     	</copy>
     </target>
+	
+	<target name="docs" depends="compile">
+		<javadoc 
+			access="public" 
+			author="true" 
+			classpathref="compile.classpath" 
+			destdir="${build.dir}/doc" 
+			nodeprecated="false" 
+			nodeprecatedlist="false" 
+			noindex="false" 
+			nonavbar="false" 
+			notree="false" 
+			source="1.5" 
+			sourcepath="${src.dir}"
+			splitindex="true" 
+			use="true" 
+			version="true">
+			<link href="http://junit.sourceforge.net/javadoc/"/>
+			<link href="http://java.sun.com/j2se/1.5.0/docs/api/"/>
+		</javadoc>
+		
+		<taskdef name="java2html"
+		    classname="de.java2html.anttasks.Java2HtmlTask"
+		    classpathref="compile.classpath"
+		/>
+		<java2html 
+			srcdir="${example.dir}" 
+			destdir="${build.dir}/doc"
+			outputFormat="xhtml11"
+			tabs="4"
+			addLineAnchors="true"/>
+	</target>
 
 	<target name="jar" depends="compile,test" description="package into jars">
 		<jar destfile="${build.dir}/${ant.project.name}-${version}.jar" basedir="${build.dir}/classes"/>
 	</target>
+	
+	<target name="dist" depends="clean,jar,docs"/>
 	
 	<target name="test" depends="compile" description="execute unit tests">
 		<delete dir="${build.dir}/testoutput"/>

@@ -4,12 +4,13 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
 
 
-  <bean id="myString" class="java.lang.String">
-  	<constructor-arg value="string loaded from context"/>
+  <bean id="user" class="atunit.example.subjects.User">
+  	<constructor-arg value="500"/>
+  	<constructor-arg ref="username"/>
   </bean>
   
-  <bean id="myStringHolder" class="atunit.example.ExampleSpringTest$StringHolder">
- 	 <property name="string" ref="myString"/>
+  <bean id="username" class="java.lang.String">
+  	<constructor-arg value="fred"/>
   </bean>
-
+  
 </beans>
