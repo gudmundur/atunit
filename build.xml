@@ -8,15 +8,24 @@
 	<property name="ant.build.javac.target" value="1.5"/>
     
 	<property name="build.dir" value="${basedir}/build"/>
+	<property name="doc.dir" value="${basedir}/doc"/>
 	<property name="src.dir" value="${basedir}/src"/>
 	<property name="example.dir" value="${basedir}/example"/>
 	<property name="test.dir" value="${basedir}/test"/>
 	<property name="lib.dir" value="${basedir}/lib"/>
 	
 	<path id="compile.classpath">
-	    <fileset dir="${lib.dir}" includes="**/*.jar"/>
+	    <fileset dir="${lib.dir}" includes="**/*.jar" excludes="build/**/*.jar"/>
 		<pathelement location="${build.dir}/classes"/>
 	</path>
+	
+	<path id="build.classpath">
+		<fileset dir="${lib.dir}/build" includes="**/*.jar"/>
+		<path refid="compile.classpath"/>
+	</path>
+	
+
+	 <taskdef resource="svntask.properties" classpathref="build.classpath"/>
 	
     <target name="compile" description="compile source">
         <mkdir dir="${build.dir}/classes"/>
@@ -38,12 +47,15 @@
     	</copy>
     </target>
 	
+	
 	<target name="docs" depends="compile">
+
+
 		<javadoc 
 			access="public" 
 			author="true" 
-			classpathref="compile.classpath" 
-			destdir="${build.dir}/doc" 
+			classpathref="build.classpath" 
+			destdir="${doc.dir}/api" 
 			nodeprecated="false" 
 			nodeprecatedlist="false" 
 			noindex="false" 
@@ -60,11 +72,11 @@
 		
 		<taskdef name="java2html"
 		    classname="de.java2html.anttasks.Java2HtmlTask"
-		    classpathref="compile.classpath"
+		    classpathref="build.classpath"
 		/>
 		<java2html 
 			srcdir="${example.dir}" 
-			destdir="${build.dir}/doc"
+			destdir="${doc.dir}/api"
 			outputFormat="xhtml11"
 			tabs="4"
 			addLineAnchors="true"/>
@@ -98,6 +110,15 @@
 	
     <target name="clean" description="clean up build artifacts">
     	<delete dir="${build.dir}"/>
+    	<svn>
+    		<revert dir="${doc.dir}" recurse="true"/>
+    	</svn>
+    	<delete>
+			<fileset dir="${doc.dir}">
+				<type type="file"/>
+				<exclude name="**/.svn/**"/>
+			</fileset>
+    	</delete>
     </target>
 	
 </project>

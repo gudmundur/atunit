@@ -36,7 +36,7 @@ public class ExampleGuiceAndJMockTest {
 	
 	/*
 	 * Just as it does when no Container is used, AtUnit creates the Mockery and
-	 * uses JMock to create any @Mock or @Stub fields. However, once they're
+	 * uses it to create any @Mock or @Stub fields. However, once they're
 	 * created, AtUnit binds them into the Guice injector so that Guice can
 	 * inject them anywhere they're needed.
 	 * 

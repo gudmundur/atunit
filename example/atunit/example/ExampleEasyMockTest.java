@@ -22,8 +22,8 @@ public class ExampleEasyMockTest {
 	User fred;
 	
 	/*
-	 * Any field annotated with @Mock will be populated automatically by AtUnit
-	 * with a mock object provided by EasyMock.
+	 * Any field annotated with @Mock or @Stub will be populated automatically
+	 * by AtUnit with a mock object provided by EasyMock.
 	 */
 	@Mock UserDao dao;
 	@Stub Logger log;
