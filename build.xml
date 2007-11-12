@@ -68,6 +68,7 @@
 			version="true">
 			<link href="http://junit.sourceforge.net/javadoc/"/>
 			<link href="http://java.sun.com/j2se/1.5.0/docs/api/"/>
+			<arg value="-notimestamp"/>
 		</javadoc>
 		
 		<taskdef name="java2html"
