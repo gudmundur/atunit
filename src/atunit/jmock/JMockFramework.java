@@ -95,15 +95,5 @@ public class JMockFramework implements MockFramework {
 		
 		return jmockFields;
 	}
-	
-	@SuppressWarnings("serial")
-	public static class NoMockeryException extends Exception {
-	}
-	@SuppressWarnings("serial")
-	public static class TooManyMockeriesException extends Exception {
-		public TooManyMockeriesException(String msg) {
-			super(msg);
-		}
-	}
 
 }

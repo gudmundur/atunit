@@ -135,7 +135,7 @@ public class SpringContainer implements Container {
 		return beandef;
 	}
 	
-	public static class InstanceHolderFactoryBean implements FactoryBean {
+	protected static class InstanceHolderFactoryBean implements FactoryBean {
 
 		final Class<?> type;
 		final Object instance;

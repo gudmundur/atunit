@@ -141,17 +141,5 @@ public class AtUnit extends JUnit4ClassRunner {
 		
 		return mockFrameworkClass.newInstance();
 	}
-	
-	
-	@SuppressWarnings("serial")
-	public static class NoUnitException extends Exception {
-	}
-	
-	@SuppressWarnings("serial")
-	public static class TooManyUnitsException extends Exception {
-		public TooManyUnitsException(String msg) {
-			super(msg);
-		}
-	}
 
 }

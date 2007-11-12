@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="atunit" default="dist">
 	
-	<property name="version" value="0.6"/>
+	<property name="version" value="0.7"/>
 	
 
 	<property name="ant.build.javac.source" value="1.5"/>

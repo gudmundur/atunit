@@ -27,6 +27,8 @@ import org.junit.runner.RunWith;
 import atunit.AtUnit;
 import atunit.ContainerClass;
 import atunit.MockFrameworkClass;
+import atunit.NoUnitException;
+import atunit.TooManyUnitsException;
 import atunit.Unit;
 
 
@@ -57,14 +59,14 @@ public class AtUnitTests {
 	public void tNoUnit() {
 		Result result = junit.run(TestClasses.NoUnit.class);
 		assertFalse(result.wasSuccessful());
-		assertTrue(result.getFailures().get(0).getException() instanceof AtUnit.NoUnitException);
+		assertTrue(result.getFailures().get(0).getException() instanceof NoUnitException);
 	}
 	
 	@Test
 	public void tTooManyUnits() {
 		Result result = junit.run(TestClasses.TooManyUnits.class);
 		assertFalse(result.wasSuccessful());
-		assertTrue(result.getFailures().get(0).getException() instanceof AtUnit.TooManyUnitsException);
+		assertTrue(result.getFailures().get(0).getException() instanceof TooManyUnitsException);
 	}
 
 	protected static class TestClasses {

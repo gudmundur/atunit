@@ -54,7 +54,7 @@ public class JMockFrameworkTests {
 	public void tMockWithoutMockery() {
 		Result result = junit.run(TestClasses.MockWithoutMockery.class);
 		assertFalse(result.wasSuccessful());
-		assertTrue(result.getFailures().get(0).getException() instanceof JMockFramework.NoMockeryException);
+		assertTrue(result.getFailures().get(0).getException() instanceof NoMockeryException);
 	}
 	
 	@Test
