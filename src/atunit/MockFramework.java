@@ -16,12 +16,24 @@
 
 package atunit;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
+
+
+/**
+ * Tells AtUnit to use a supported mock objects framework. The specified
+ * framework will be used to populate fields in the test annotated with
+ * {@link Mock} or {@link Stub}.
+ * 
+ * A parameter of type {@link Option} is required.
+ * 
+ * @author Logan Johnson &lt;logan.johnson@gmail.com&gt;
+ * 
+ * @see Mock
+ * @see Stub
+ * @see <a href="example/ExampleJMockTest.java.xhtml">ExampleJMockTest.java</a>
+ * @see <a href="example/ExampleJMockTest.java.xhtml">ExampleEasyMockTest.java</a>
+ */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE})
 @Inherited

@@ -24,7 +24,6 @@ public interface MockFramework {
 	/**
 	 * 
 	 * @param fields contains fields which the mock framework may populate.
-	 * @return 
 	 */
 	Map<Field,Object> getValues(Field[] fields) throws Exception;
 

@@ -16,12 +16,19 @@
 
 package atunit;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
+/**
+ * Tells AtUnit to use a supported dependency injection (inversion of control) container.
+ * 
+ * A parameter of type {@link Option} is required.
+ * 
+ * @author Logan Johnson &lt;logan.johnson@gmail.com&gt;
+ * 
+ * @see <a href="example/ExampleGuiceTest.java.xhtml">ExampleGuiceTest.java</a>
+ * @see <a href="example/ExampleSpringTest.java.xhtml">ExampleSpringTest.java</a>
+ *
+ */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE})
 @Inherited

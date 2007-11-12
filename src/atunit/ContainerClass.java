@@ -16,14 +16,22 @@
 
 package atunit;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 import atunit.core.Container;
 
+/**
+ * Specifies a {@link Container} implementation to use as the dependency
+ * injection container for the test.
+ * <p>
+ * This annotation is used to plug in an unsupported or custom container. To use
+ * a supported container, use the {@link atunit.Container} annotation instead.
+ * 
+ * @author Logan Johnson &lt;logan.johnson@gmail.com&gt;
+ * 
+ * @see Container
+ * 
+ */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE})
 @Inherited

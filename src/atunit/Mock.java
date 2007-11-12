@@ -16,11 +16,20 @@
 
 package atunit;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
+/**
+ * Fields with this annotation are populated with mock objects created using the configured framework.
+ * 
+ * A framework is chosen via the {@link MockFramework} or {@link MockFrameworkClass} annotation on the test class.
+ * 
+ * @author Logan Johnson &lt;logan.johnson@gmail.com&gt;
+ *
+ * @see MockFramework
+ * @see MockFrameworkClass
+ * @see <a href="example/ExampleJMockTest.java.xhtml">ExampleJMockTest.java</a>
+ * @see <a href="example/ExampleJMockTest.java.xhtml">ExampleEasyMockTest.java</a>
+ */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD})
 public @interface Mock {

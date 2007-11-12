@@ -79,7 +79,7 @@
 	<target name="test" depends="compile" description="execute unit tests">
 		<delete dir="${build.dir}/testoutput"/>
 		<mkdir dir="${build.dir}/testoutput"/>
-		<junit printsummary="withOutAndErr">
+		<junit printsummary="withOutAndErr" haltonfailure="true">
 			<formatter type="plain"/>
 			<classpath>
 				<path refid="compile.classpath"/>

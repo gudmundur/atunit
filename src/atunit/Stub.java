@@ -21,6 +21,18 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * This annotation is like {@link Mock}, except that the object provided by
+ * AtUnit is a dummy and is ignored by the mock objects framework.
+ * <p>
+ * The specific meaning of this annotation depends on the selected mock objects
+ * framework, but in general it should be used to fulfill dependencies which are
+ * irrelevant to the test.
+ * 
+ * @author Logan Johnson &lt;logan.johnson@gmail.com&gt;
+ * 
+ * @see Mock
+ */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD})
 public @interface Stub {}

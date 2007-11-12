@@ -16,13 +16,17 @@
 
 package atunit;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
+/**
+ * Indicates the subject of the test. Every AtUnit test must have exactly one
+ * field which carries this annotation.
+ * 
+ * @author Logan Johnson &lt;logan.johnson@gmail.com&gt;
+ * 
+ * @see <a href="example/ExampleAtUnitTest.java.xhtml">ExampleAtUnitTest.java</a>
+ */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD})
 public @interface Unit {
-	boolean ignored() default false;
 }

@@ -24,6 +24,6 @@ JUnitCore junit;
 	public void tExample() {
 		Result result = junit.run(ExampleGuiceTest.class);
 		assertTrue(result.wasSuccessful());
-		assertEquals(1, result.getRunCount());
+		assertEquals(2, result.getRunCount());
 	}
 }

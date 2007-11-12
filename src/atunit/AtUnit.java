@@ -18,7 +18,6 @@ package atunit;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.internal.runners.InitializationError;
@@ -34,6 +33,16 @@ import atunit.guice.GuiceContainer;
 import atunit.jmock.JMockFramework;
 import atunit.spring.SpringContainer;
 
+/**
+ * This is the JUnit test runner used for AtUnit tests. It delegates to the
+ * configured {@link atunit.core.MockFramework} for mock and stub object
+ * creation and to the configured {@link atunit.core.Container} for dependency
+ * injection.
+ * 
+ * @author Logan Johnson &lt;logan.johnson@gmail.com&gt;
+ * 
+ * @see <a href="example/ExampleAtUnitTest.java.xhtml"/>ExampleAtUnitTest.java</a>
+ */
 public class AtUnit extends JUnit4ClassRunner {
 
 	public AtUnit(Class<?> testClass) throws InitializationError {

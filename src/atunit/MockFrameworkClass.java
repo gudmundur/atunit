@@ -16,14 +16,21 @@
 
 package atunit;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 import atunit.core.MockFramework;
 
+/**
+ * Specifies a {@link MockFramework} implementation to use as the mock objects framework for the test.
+ * <p>
+ * This annotation is used to plug in an unsupported or custom mock objects framework. To use
+ * a supported framework, use the {@link atunit.MockFramework} annotation instead.
+ * 
+ * @author Logan Johnson &lt;logan.johnson@gmail.com&gt;
+ * 
+ * @see MockFramework
+ * 
+ */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE})
 @Inherited
