@@ -6,15 +6,14 @@
 Context
 </TITLE>
 
+<META NAME="keywords" CONTENT="atunit.spring.Context class">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
 <SCRIPT type="text/javascript">
 function windowTitle()
 {
-    if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Context";
-    }
+    parent.document.title="Context";
 }
 </SCRIPT>
 <NOSCRIPT>
@@ -23,7 +22,6 @@ function windowTitle()
 </HEAD>
 
 <BODY BGCOLOR="white" onload="windowTitle();">
-<HR>
 
 
 <!-- ========= START OF TOP NAVBAR ======= -->
@@ -91,11 +89,18 @@ atunit.spring</FONT>
 Annotation Type Context</H2>
 <HR>
 <DL>
-<DT><PRE><FONT SIZE="-1"><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Retention.html?is-external=true" title="class or interface in java.lang.annotation">@Retention</A>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Retention.html?is-external=true#value()" title="class or interface in java.lang.annotation">value</A>=<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/RetentionPolicy.html?is-external=true#RUNTIME" title="class or interface in java.lang.annotation">RUNTIME</A>)
-<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Target.html?is-external=true" title="class or interface in java.lang.annotation">@Target</A>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Target.html?is-external=true#value()" title="class or interface in java.lang.annotation">value</A>=<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/ElementType.html?is-external=true#TYPE" title="class or interface in java.lang.annotation">TYPE</A>)
-<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Inherited.html?is-external=true" title="class or interface in java.lang.annotation">@Inherited</A>
+<DT><PRE><FONT SIZE="-1"><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Retention.html" title="class or interface in java.lang.annotation">@Retention</A>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Retention.html#value()" title="class or interface in java.lang.annotation">value</A>=<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/RetentionPolicy.html#RUNTIME" title="class or interface in java.lang.annotation">RUNTIME</A>)
+<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Target.html" title="class or interface in java.lang.annotation">@Target</A>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Target.html#value()" title="class or interface in java.lang.annotation">value</A>=<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/ElementType.html#TYPE" title="class or interface in java.lang.annotation">TYPE</A>)
+<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Inherited.html" title="class or interface in java.lang.annotation">@Inherited</A>
 </FONT>public @interface <B>Context</B></DL>
 </PRE>
+
+<P>
+Specifies the location of Spring XML context configuration file to load. The
+ classpath will be searched for the name provided. Bean definitions loaded
+ from the XML file will be merged into the same context as bean definitions
+ from test class fields.
+<P>
 
 <P>
 <HR>
@@ -111,7 +116,7 @@ Annotation Type Context</H2>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../atunit/spring/Context.html#value()">value</A></B></CODE>
 
 <BR>
@@ -134,7 +139,7 @@ Annotation Type Context</H2>
 <A NAME="value()"><!-- --></A><H3>
 value</H3>
 <PRE>
-public abstract <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>value</B></PRE>
+public abstract <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html" title="class or interface in java.lang">String</A> <B>value</B></PRE>
 <DL>
 <DD><DL>
 </DL>

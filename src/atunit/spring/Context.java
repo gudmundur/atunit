@@ -16,12 +16,14 @@
 
 package atunit.spring;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
+/**
+ * Specifies the location of Spring XML context configuration file to load. The
+ * classpath will be searched for the name provided. Bean definitions loaded
+ * from the XML file will be merged into the same context as bean definitions
+ * from test class fields.
+ */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE})
 @Inherited

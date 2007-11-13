@@ -6,15 +6,14 @@
 Bean
 </TITLE>
 
+<META NAME="keywords" CONTENT="atunit.spring.Bean class">
 
 <LINK REL ="stylesheet" TYPE="text/css" HREF="../../stylesheet.css" TITLE="Style">
 
 <SCRIPT type="text/javascript">
 function windowTitle()
 {
-    if (location.href.indexOf('is-external=true') == -1) {
-        parent.document.title="Bean";
-    }
+    parent.document.title="Bean";
 }
 </SCRIPT>
 <NOSCRIPT>
@@ -23,7 +22,6 @@ function windowTitle()
 </HEAD>
 
 <BODY BGCOLOR="white" onload="windowTitle();">
-<HR>
 
 
 <!-- ========= START OF TOP NAVBAR ======= -->
@@ -91,10 +89,16 @@ atunit.spring</FONT>
 Annotation Type Bean</H2>
 <HR>
 <DL>
-<DT><PRE><FONT SIZE="-1"><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Retention.html?is-external=true" title="class or interface in java.lang.annotation">@Retention</A>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Retention.html?is-external=true#value()" title="class or interface in java.lang.annotation">value</A>=<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/RetentionPolicy.html?is-external=true#RUNTIME" title="class or interface in java.lang.annotation">RUNTIME</A>)
-<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Target.html?is-external=true" title="class or interface in java.lang.annotation">@Target</A>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Target.html?is-external=true#value()" title="class or interface in java.lang.annotation">value</A>=<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/ElementType.html?is-external=true#FIELD" title="class or interface in java.lang.annotation">FIELD</A>)
+<DT><PRE><FONT SIZE="-1"><A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Retention.html" title="class or interface in java.lang.annotation">@Retention</A>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Retention.html#value()" title="class or interface in java.lang.annotation">value</A>=<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/RetentionPolicy.html#RUNTIME" title="class or interface in java.lang.annotation">RUNTIME</A>)
+<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Target.html" title="class or interface in java.lang.annotation">@Target</A>(<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/Target.html#value()" title="class or interface in java.lang.annotation">value</A>=<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/annotation/ElementType.html#FIELD" title="class or interface in java.lang.annotation">FIELD</A>)
 </FONT>public @interface <B>Bean</B></DL>
 </PRE>
+
+<P>
+Binds a field to a bean in the Spring application context. Bean definitions
+ from the test class fields are merged into the same context as bean
+ definitions from other sources (such as an XML file).
+<P>
 
 <P>
 <HR>
@@ -110,11 +114,11 @@ Annotation Type Bean</H2>
 </TR>
 <TR BGCOLOR="white" CLASS="TableRowColor">
 <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A></CODE></FONT></TD>
+<CODE>&nbsp;<A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html" title="class or interface in java.lang">String</A></CODE></FONT></TD>
 <TD><CODE><B><A HREF="../../atunit/spring/Bean.html#value()">value</A></B></CODE>
 
 <BR>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An optional bean name to use.</TD>
 </TR>
 </TABLE>
 &nbsp;
@@ -122,8 +126,10 @@ Annotation Type Bean</H2>
 <A NAME="value()"><!-- --></A><H3>
 value</H3>
 <PRE>
-public abstract <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html?is-external=true" title="class or interface in java.lang">String</A> <B>value</B></PRE>
+public abstract <A HREF="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/String.html" title="class or interface in java.lang">String</A> <B>value</B></PRE>
 <DL>
+<DD>An optional bean name to use.  By default, beans are autowired by type.
+<P>
 <DD><DL>
 </DL>
 </DD>

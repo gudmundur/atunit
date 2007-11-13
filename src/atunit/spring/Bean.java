@@ -16,14 +16,19 @@
 
 package atunit.spring;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
+/**
+ * Binds a field to a bean in the Spring application context. Bean definitions
+ * from the test class fields are merged into the same context as bean
+ * definitions from other sources (such as an XML file).
+ */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD})
 public @interface Bean {
 	
+	/**
+	 * An optional bean name to use.  By default, beans are autowired by type.
+	 */
 	String value() default "";
 }
