@@ -17,6 +17,12 @@
 	<classpathentry kind="lib" path="lib/spring/spring-core.jar" sourcepath="lib/spring/spring-src.zip"/>
 	<classpathentry kind="lib" path="lib/spring/log4j-1.2.14.jar"/>
 	<classpathentry kind="lib" path="lib/spring/commons-logging.jar"/>
+	<classpathentry kind="lib" path="lib/core/google-collections/google-collect-snapshot-20071022.jar" sourcepath="lib/core/google-collections/src-snapshot-20071022.zip">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/atunit/lib/core/google-collections/javadoc-snapshot-20071022.zip!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="lib/build/jarjar/jarjar-1.0rc6.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
