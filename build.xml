@@ -101,7 +101,13 @@
 		</jar>
 	</target>
 	
-	<target name="dist" depends="clean,jar,docs"/>
+	<target name="dist" depends="clean,jar">
+		<zip destfile="${build.dir}/${ant.project.name}-${version}.zip">
+			<zipfileset dir="${build.dir}" includes="*.jar"/>
+			<zipfileset file="COPYING"/>
+			<zipfileset dir="${doc.dir}" prefix="doc/"/>
+		</zip>
+	</target>
 	
 	<target name="test" depends="compile" description="execute unit tests">
 		<delete dir="${build.dir}/testoutput"/>
