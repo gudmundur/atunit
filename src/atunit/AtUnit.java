@@ -18,10 +18,15 @@ package atunit;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.junit.internal.runners.InitializationError;
 import org.junit.internal.runners.JUnit4ClassRunner;
+
+import com.google.common.collect.Sets;
 
 import atunit.core.Container;
 import atunit.core.IncompatibleAnnotationException;
@@ -53,17 +58,18 @@ public class AtUnit extends JUnit4ClassRunner {
 	@Override
 	protected Object createTest() throws Exception {
 		Class<?> c = getTestClass().getJavaClass();
+		Set<Field> testFields = getFields(c);
 		
 		Container container = getContainerFor(c);
 		MockFramework mockFramework = getMockFrameworkFor(c);
 				
 		// make sure we have one (and only one) @Unit field
-		Field unitField = getUnitField(c);
+		Field unitField = getUnitField(testFields);
 		if ( unitField.getAnnotation(Mock.class) != null ) {
 			throw new IncompatibleAnnotationException(Unit.class, Mock.class);
 		}
 		
-		final Map<Field,Object> fieldValues = mockFramework.getValues(c.getDeclaredFields());
+		final Map<Field,Object> fieldValues = mockFramework.getValues(testFields.toArray(new Field[0]));
 		if ( fieldValues.containsKey(unitField)) {
 			throw new IncompatibleAnnotationException(Unit.class, unitField.getType());
 		}
@@ -81,9 +87,27 @@ public class AtUnit extends JUnit4ClassRunner {
 		return test;
 	}
 
-	protected Field getUnitField(Class<?> testClass) throws NoUnitException, TooManyUnitsException {
+	
+	/**
+	 * Gets all declared fields and all inherited fields.
+	 */
+	protected Set<Field> getFields(Class<?> c) {
+		Set<Field> fields = Sets.newHashSet(c.getDeclaredFields());
+		while ( (c = c.getSuperclass()) != null ) {
+			for ( Field f : c.getDeclaredFields() ) {
+				if ( !Modifier.isStatic(f.getModifiers())
+					 && !Modifier.isPrivate(f.getModifiers())
+				     ) {
+					fields.add(f);
+				}
+			}
+		}
+		return fields;
+	}
+	
+	protected Field getUnitField(Set<Field> fields) throws NoUnitException, TooManyUnitsException {
 		Field unitField = null;
-		for ( Field field : testClass.getDeclaredFields() ) {
+		for ( Field field : fields ) {
 			for ( Annotation anno : field.getAnnotations() ) {
 				if ( Unit.class.isAssignableFrom(anno.annotationType())) {
 					if ( unitField != null ) throw new TooManyUnitsException("Already had field " + unitField + " when I found field " + field);

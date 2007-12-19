@@ -51,6 +51,13 @@ public class JMockFrameworkTests {
 	}
 	
 	@Test
+	public void tInheritance() {
+		Result result = junit.run(TestClasses.Inheritance.class);
+		assertTrue(result.wasSuccessful());
+		assertEquals(2, result.getRunCount());
+	}
+	
+	@Test
 	public void tMockWithoutMockery() {
 		Result result = junit.run(TestClasses.MockWithoutMockery.class);
 		assertFalse(result.wasSuccessful());
@@ -104,6 +111,10 @@ public class JMockFrameworkTests {
 				
 				assertTrue(myMock.isAwesome());
 			}
+		}
+		
+		public static class Inheritance extends WithMockery {
+			
 		}
 		
 		public static class MockWithoutMockery extends AbstractJMockTest {

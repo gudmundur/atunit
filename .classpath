@@ -4,7 +4,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="test"/>
 	<classpathentry kind="src" path="example"/>
-	<classpathentry kind="lib" path="lib/core/junit/junit.jar"/>
 	<classpathentry kind="lib" path="lib/guice/guice/aopalliance.jar"/>
 	<classpathentry kind="lib" path="lib/guice/guice/guice.jar"/>
 	<classpathentry kind="lib" path="lib/easymock/easymock.jar"/>
@@ -22,7 +21,6 @@
 			<attribute name="javadoc_location" value="jar:platform:/resource/atunit/lib/core/google-collections/javadoc-snapshot-20071022.zip!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/build/jarjar/jarjar-1.0rc6.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="lib/core/junit/junit-4.4.jar" sourcepath="lib/core/junit/junit-4.4-src.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

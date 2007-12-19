@@ -69,6 +69,13 @@ public class AtUnitTests {
 		assertTrue(result.getFailures().get(0).getException() instanceof TooManyUnitsException);
 	}
 
+	@Test
+	public void tInheritedUnit() {
+		Result result = junit.run(TestClasses.InheritedUnit.class);
+		assertTrue(result.wasSuccessful());
+	}
+	
+	
 	protected static class TestClasses {
 		
 		@RunWith(AtUnit.class)
@@ -99,6 +106,17 @@ public class AtUnitTests {
 		public static class TooManyUnits extends AbstractAtUnitTest {
 			@Unit String firstUnit;
 			@Unit String secondUnit;
+		}
+		
+		public static class InheritedUnit extends HappyTest {
+			
+			@Before
+			public void setUp() {
+				unit = getClass().getName();
+			}
+			public void tUnitInheritance() {
+				assertEquals(getClass().getName(), unit);
+			}
 		}
 		
 	}

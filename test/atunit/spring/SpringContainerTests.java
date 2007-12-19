@@ -66,6 +66,13 @@ public class SpringContainerTests {
 	}
 	
 	@Test
+	public void tInheritance() {
+		Result result = junit.run(TestClasses.Inheritance.class);
+		assertEquals(1, result.getRunCount());
+		assertTrue(result.wasSuccessful());
+	}
+	
+	@Test
 	public void tNameBindings() {
 		Result result = junit.run(TestClasses.MockIntegration.class);
 		assertEquals(1, result.getRunCount());
@@ -149,6 +156,9 @@ public class SpringContainerTests {
 				EasyMock.replay(stringSet);
 				assertTrue(stringSet.contains("mystring"));
 			}
+		}
+		
+		public static class Inheritance extends MockIntegration {
 		}
 		
 		@MockFramework(MockFramework.Option.EASYMOCK)

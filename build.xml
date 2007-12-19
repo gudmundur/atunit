@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="atunit" default="dist">
 	
-	<property name="version" value="0.8"/>
+	<property name="version" value="1.0"/>
 	
 
 	<property name="ant.build.javac.source" value="1.5"/>
@@ -83,12 +83,22 @@
 			addLineAnchors="true"/>
 	</target>
 
-	<target name="jar" depends="compile,test" description="package into jars">
+	<target name="jar" depends="compile,test,docs" description="package into jars">
 		<taskdef name="jarjar" classname="com.tonicsystems.jarjar.JarJarTask" classpathref="build.classpath"/>
 		<jarjar destfile="${build.dir}/${ant.project.name}-${version}.jar" basedir="${build.dir}/classes">
 			<zipfileset src="${lib.dir}/core/google-collections/google-collect-snapshot-20071022.jar"/>
 			<rule pattern="com.google.common.**" result="atunit.lib.@0"/>
+			<keep pattern="atunit.**"/>
 		</jarjar>
+		
+		<jar destfile="${build.dir}/${ant.project.name}-${version}.src.jar">
+			<fileset dir="${src.dir}"/>
+			<fileset dir="${example.dir}"/>
+		</jar>
+		
+		<jar destfile="${build.dir}/${ant.project.name}-${version}.javadoc.jar">
+			<fileset dir="${doc.dir}/api"/>
+		</jar>
 	</target>
 	
 	<target name="dist" depends="clean,jar,docs"/>

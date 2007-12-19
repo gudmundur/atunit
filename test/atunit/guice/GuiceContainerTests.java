@@ -1,8 +1,6 @@
 package atunit.guice;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import java.lang.reflect.Field;
 import java.util.Map;
@@ -11,14 +9,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
-import org.junit.runner.RunWith;
 
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
-import com.google.inject.name.Named;
 
-import atunit.AtUnit;
-import atunit.Container;
 import atunit.example.ExampleGuiceTest;
 
 public class GuiceContainerTests {
@@ -38,6 +32,12 @@ public class GuiceContainerTests {
 		assertEquals(2, result.getRunCount());
 	}
 	
+	@Test
+	public void tInheritance() {
+		Result result = junit.run(Inheritance.class);
+		assertTrue(result.wasSuccessful());
+		assertEquals(2, result.getRunCount());
+	}
 	
 	@Test
 	public void tDuplicateFields() throws Exception {
@@ -58,6 +58,9 @@ public class GuiceContainerTests {
 		// this should have our value
 		assertEquals(3, df.field3.intValue());
 	}
+
+	public static class Inheritance extends ExampleGuiceTest {}
+
 	protected static class DuplicateFields {
 		@Inject public String field1;
 		@Inject public String field2;

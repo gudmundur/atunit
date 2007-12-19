@@ -53,6 +53,14 @@ public class EasyMockFrameworkTests {
 		assertEquals(1, result.getRunCount());
 	}
 	
+	
+	@Test
+	public void tInheritance() {
+		Result result = junit.run(TestClasses.Inheritance.class);
+		assertTrue(result.wasSuccessful());
+		assertEquals(1, result.getRunCount());
+	}
+	
 	protected static class TestClasses {
 		
 		@RunWith(AtUnit.class)
@@ -74,6 +82,10 @@ public class EasyMockFrameworkTests {
 			public static interface StringFactory {
 				public String getString();
 			}
+		}
+		
+		public static class Inheritance extends OptionMocks {
+			
 		}
 
 		@RunWith(AtUnit.class)
