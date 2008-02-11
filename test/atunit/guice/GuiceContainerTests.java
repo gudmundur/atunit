@@ -59,7 +59,9 @@ public class GuiceContainerTests {
 		assertEquals(3, df.field3.intValue());
 	}
 
-	public static class Inheritance extends ExampleGuiceTest {}
+	protected static class Inheritance extends ExampleGuiceTest {
+		public Inheritance() {}
+	}
 
 	protected static class DuplicateFields {
 		@Inject public String field1;
