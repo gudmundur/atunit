@@ -3,6 +3,8 @@ package atunit.guice;
 import static org.junit.Assert.*;
 
 import java.lang.reflect.Field;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Before;
@@ -10,6 +12,7 @@ import org.junit.Test;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 
@@ -58,6 +61,17 @@ public class GuiceContainerTests {
 		// this should have our value
 		assertEquals(3, df.field3.intValue());
 	}
+	
+	@Test
+	public void tGenericFieldType() throws Exception {
+		GuiceContainer container = new GuiceContainer();
+		Map<Field,Object> fieldValues = Maps.newHashMap();
+		List<String> stringList = Lists.newLinkedList();
+		fieldValues.put( GenericFieldType.class.getDeclaredField("stringList"), stringList);
+		GenericFieldType gft = (GenericFieldType)container.createTest(GenericFieldType.class, fieldValues);
+		
+		assertSame(stringList, gft.stringList);
+	}
 
 	protected static class Inheritance extends ExampleGuiceTest {
 		public Inheritance() {}
@@ -67,5 +81,9 @@ public class GuiceContainerTests {
 		@Inject public String field1;
 		@Inject public String field2;
 		@Inject public Integer field3;
+	}
+	
+	protected static class GenericFieldType {
+		@Inject public List<String> stringList;
 	}
 }
