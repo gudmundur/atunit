@@ -16,7 +16,9 @@
 
 package atunit.core;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -25,17 +27,16 @@ import org.junit.runner.Result;
 import org.junit.runner.RunWith;
 
 import atunit.AtUnit;
-import atunit.ContainerClass;
-import atunit.MockFrameworkClass;
+import atunit.Container;
+import atunit.MockFramework;
 import atunit.NoUnitException;
 import atunit.TooManyUnitsException;
 import atunit.Unit;
 
-
 public class AtUnitTests {
 
 	JUnitCore junit;
-	
+
 	@Before
 	public void setUp() {
 		junit = new JUnitCore();
@@ -47,21 +48,21 @@ public class AtUnitTests {
 		assertTrue(result.wasSuccessful());
 		assertEquals(1, result.getRunCount());
 	}
-	
+
 	@Test
 	public void tClassAnnotations() {
 		Result result = junit.run(TestClasses.ClassAnnotationsTest.class);
 		assertTrue(result.wasSuccessful());
 		assertEquals(1, result.getRunCount());
 	}
-	
+
 	@Test
 	public void tNoUnit() {
 		Result result = junit.run(TestClasses.NoUnit.class);
 		assertFalse(result.wasSuccessful());
 		assertTrue(result.getFailures().get(0).getException() instanceof NoUnitException);
 	}
-	
+
 	@Test
 	public void tTooManyUnits() {
 		Result result = junit.run(TestClasses.TooManyUnits.class);
@@ -74,10 +75,9 @@ public class AtUnitTests {
 		Result result = junit.run(TestClasses.InheritedUnit.class);
 		assertTrue(result.wasSuccessful());
 	}
-	
-	
+
 	protected static class TestClasses {
-		
+
 		@RunWith(AtUnit.class)
 		public static abstract class AbstractAtUnitTest {
 			@Test
@@ -85,39 +85,45 @@ public class AtUnitTests {
 				assertTrue(true);
 			}
 		}
-		
+
 		@RunWith(AtUnit.class)
-		@MockFrameworkClass(NoMockFramework.class)
-		@ContainerClass(NoContainer.class)
+		@MockFramework(NoMockFramework.class)
+		@Container(NoContainer.class)
 		public static class ClassAnnotationsTest {
-			@Unit String unit;
+			@Unit
+			String unit;
+
 			@Test
 			public void tPass() {
 			}
 		}
-		
+
 		public static class HappyTest extends AbstractAtUnitTest {
-			@Unit String unit;
+			@Unit
+			String unit;
 		}
-		
+
 		public static class NoUnit extends AbstractAtUnitTest {
 		}
-		
+
 		public static class TooManyUnits extends AbstractAtUnitTest {
-			@Unit String firstUnit;
-			@Unit String secondUnit;
+			@Unit
+			String firstUnit;
+			@Unit
+			String secondUnit;
 		}
-		
+
 		public static class InheritedUnit extends HappyTest {
-			
+
 			@Before
 			public void setUp() {
 				unit = getClass().getName();
 			}
+
 			public void tUnitInheritance() {
 				assertEquals(getClass().getName(), unit);
 			}
 		}
-		
+
 	}
 }

@@ -22,7 +22,7 @@ import java.util.Map;
 
 import atunit.Mock;
 
-public class NoMockFramework implements MockFramework {
+public class NoMockFramework implements IMockFramework {
 
 	public Map<Field, Object> getValues(Field[] fields) throws Exception {
 		for ( Field field : fields ) {

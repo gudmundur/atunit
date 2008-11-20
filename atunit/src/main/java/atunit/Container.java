@@ -16,29 +16,32 @@
 
 package atunit;
 
-import java.lang.annotation.*;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+import javax.swing.text.html.Option;
+
+import atunit.core.IContainer;
 
 /**
- * Tells AtUnit to use a supported dependency injection (inversion of control) container.
+ * Tells AtUnit to use a supported dependency injection (inversion of control)
+ * container.
  * 
  * A parameter of type {@link Option} is required.
  * 
  * @author Logan Johnson &lt;logan.johnson@gmail.com&gt;
  * 
  * @see <a href="example/ExampleGuiceTest.java.xhtml">ExampleGuiceTest.java</a>
- * @see <a href="example/ExampleSpringTest.java.xhtml">ExampleSpringTest.java</a>
- *
+ * @see <a
+ *      href="example/ExampleSpringTest.java.xhtml">ExampleSpringTest.java</a>
+ * 
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE})
+@Target( { ElementType.TYPE })
 @Inherited
 public @interface Container {
-	
-	public enum Option {
-		GUICE,
-		SPRING
-	}
-	
-	Option value();
-	
+	Class<? extends IContainer> value();
 }

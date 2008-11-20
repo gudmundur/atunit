@@ -16,9 +16,15 @@
 
 package atunit;
 
-import java.lang.annotation.*;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
+import javax.swing.text.html.Option;
 
+import atunit.core.IMockFramework;
 
 /**
  * Tells AtUnit to use a supported mock objects framework. The specified
@@ -32,18 +38,12 @@ import java.lang.annotation.*;
  * @see Mock
  * @see Stub
  * @see <a href="example/ExampleJMockTest.java.xhtml">ExampleJMockTest.java</a>
- * @see <a href="example/ExampleJMockTest.java.xhtml">ExampleEasyMockTest.java</a>
+ * @see <a
+ *      href="example/ExampleJMockTest.java.xhtml">ExampleEasyMockTest.java</a>
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE})
+@Target( { ElementType.TYPE })
 @Inherited
 public @interface MockFramework {
-	
-	public enum Option {
-		JMOCK,
-		EASYMOCK
-	}
-	
-	Option value();
-	
+	Class<? extends IMockFramework> value();
 }

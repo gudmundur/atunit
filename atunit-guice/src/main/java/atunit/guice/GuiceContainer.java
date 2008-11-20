@@ -21,55 +21,53 @@ import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.Map;
 
+import atunit.core.IContainer;
+
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.Key;
 import com.google.inject.Module;
 import com.google.inject.TypeLiteral;
 
-import atunit.core.Container;
-
-public class GuiceContainer implements Container {
+public class GuiceContainer implements IContainer {
 
 	public Object createTest(Class<?> testClass, Map<Field, Object> fieldValues) throws Exception {
-		
+
 		FieldModule fields = new FieldModule(fieldValues);
-		
+
 		Injector injector;
-		if ( Module.class.isAssignableFrom(testClass)) {
-			injector = Guice.createInjector(fields, (Module)testClass.newInstance() );
+		if (Module.class.isAssignableFrom(testClass)) {
+			injector = Guice.createInjector(fields, (Module) testClass.newInstance());
 		} else {
 			injector = Guice.createInjector(fields);
 		}
 		return injector.getInstance(testClass);
 	}
-	
-	
+
 	protected class FieldModule extends AbstractModule {
-		final Map<Field,Object> fields;
-		
-		public FieldModule(Map<Field,Object> fields) {
+		final Map<Field, Object> fields;
+
+		public FieldModule(Map<Field, Object> fields) {
 			this.fields = fields;
 		}
-		
+
 		@Override
 		@SuppressWarnings("unchecked")
 		protected void configure() {
-			
+
 			// map field values by type
 			Multimap<Type, Field> fieldsByType = Multimaps.newHashMultimap();
-			for ( Field field : fields.keySet() ) {
+			for (Field field : fields.keySet()) {
 				fieldsByType.put(field.getGenericType(), field);
 			}
-			
+
 			// for any types that don't have duplicates, bind instances.
-			for ( Type type : fieldsByType.keySet() ) {
+			for (Type type : fieldsByType.keySet()) {
 				Collection<Field> fields = fieldsByType.get(type);
-				if ( fields.size() == 1 ) {
+				if (fields.size() == 1) {
 					Field field = Iterables.getOnlyElement(fields);
 					TypeLiteral literal = TypeLiteral.get(type);
 					bind(literal).toInstance(this.fields.get(field));
@@ -77,5 +75,5 @@ public class GuiceContainer implements Container {
 			}
 		}
 	}
-	
+
 }

@@ -31,9 +31,9 @@ import org.springframework.context.ApplicationContextException;
 import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.core.io.UrlResource;
 
-import atunit.core.Container;
+import atunit.core.IContainer;
 
-public class SpringContainer implements Container {
+public class SpringContainer implements IContainer {
 
 	public Object createTest(Class<?> testClass, Map<Field, Object> fieldValues) throws Exception {
 		

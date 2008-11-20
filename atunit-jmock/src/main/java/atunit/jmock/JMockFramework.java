@@ -30,9 +30,9 @@ import org.jmock.integration.junit4.JUnit4Mockery;
 import atunit.Mock;
 import atunit.Stub;
 import atunit.core.IncompatibleAnnotationException;
-import atunit.core.MockFramework;
+import atunit.core.IMockFramework;
 
-public class JMockFramework implements MockFramework {
+public class JMockFramework implements IMockFramework {
 
 	public Map<Field, Object> getValues(Field[] fields) throws Exception {
 		final Map<Field,Object> jmockFields = new HashMap<Field,Object>();

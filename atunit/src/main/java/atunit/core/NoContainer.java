@@ -19,7 +19,7 @@ package atunit.core;
 import java.lang.reflect.Field;
 import java.util.Map;
 
-public class NoContainer implements Container {
+public class NoContainer implements IContainer {
 
 	public Object createTest(Class<?> testClass, Map<Field, Object> fieldValues) throws Exception {
 		return testClass.newInstance();

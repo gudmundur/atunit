@@ -24,9 +24,9 @@ import org.easymock.EasyMock;
 
 import atunit.Mock;
 import atunit.Stub;
-import atunit.core.MockFramework;
+import atunit.core.IMockFramework;
 
-public class EasyMockFramework implements MockFramework {
+public class EasyMockFramework implements IMockFramework {
 
 	public Map<Field, Object> getValues(Field[] fields) throws Exception {
 		Map<Field,Object> mocksAndStubs = new HashMap<Field,Object>();
