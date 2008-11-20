@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+
+  <bean id="user" class="atunit.example.subjects.User">
+  	<constructor-arg value="500"/>
+  	<constructor-arg ref="username"/>
+  </bean>
+  
+  <bean id="username" class="java.lang.String">
+  	<constructor-arg value="fred"/>
+  </bean>
+  
+</beans>
