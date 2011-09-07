@@ -1,32 +1,33 @@
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.google.code.atunit</groupId>
-	<artifactId>atunit</artifactId>
-	<packaging>jar</packaging>
-	<name>AtUnit</name>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.google.code.atunit</groupId>
+    <artifactId>atunit</artifactId>
+    <packaging>jar</packaging>
+    <name>AtUnit</name>
 
-	<parent>
-		<groupId>com.google.code.atunit</groupId>
-		<artifactId>atunit-parent</artifactId>
-		<version>1.0.1</version>
-	</parent>
+    <parent>
+        <groupId>com.google.code.atunit</groupId>
+        <artifactId>atunit-parent</artifactId>
+        <version>1.0.1</version>
+    </parent>
 
-	<dependencies>
-		<dependency>
-			<groupId>com.google.code.atunit</groupId>
-			<artifactId>atunit-test</artifactId>
-		</dependency>
+    <dependencies>
+        <dependency>
+            <groupId>com.google.code.atunit</groupId>
+            <artifactId>atunit-test</artifactId>
+        </dependency>
 
-		<dependency>
-			<groupId>com.google.code.google-collections</groupId>
-			<artifactId>google-collect</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>com.google.collections</groupId>
+            <artifactId>google-collections</artifactId>
+        </dependency>
 
 		<!-- test dependencies -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+    </dependencies>
 </project>
