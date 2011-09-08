@@ -73,9 +73,9 @@
 			</dependency>
 
 			<dependency>
-				<groupId>com.google.code.google-collections</groupId>
-				<artifactId>google-collect</artifactId>
-				<version>snapshot-20071022</version>
+				<groupId>com.google.collections</groupId>
+				<artifactId>google-collections</artifactId>
+				<version>1.0</version>
 			</dependency>
 
 			<dependency>

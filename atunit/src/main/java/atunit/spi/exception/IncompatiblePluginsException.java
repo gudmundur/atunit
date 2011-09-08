@@ -2,10 +2,8 @@ package atunit.spi.exception;
 
 import java.util.Arrays;
 import java.util.List;
-
-import com.google.common.base.Join;
-
 import atunit.spi.plugin.AtUnitPlugin;
+import com.google.common.base.Joiner;
 
 public class IncompatiblePluginsException extends InvalidTestException {
 
@@ -22,6 +20,6 @@ public class IncompatiblePluginsException extends InvalidTestException {
 		}
 		
 		List<Class<?>> list = Arrays.asList(classes);
-		return Join.join(", ", list.subList(0, list.size()-1)) + (s > 2 ? "," : "") + " and " + list.get(list.size()-1);
+		return Joiner.on(", ").join(list.subList(0, list.size()-1)) + (s > 2 ? "," : "") + " and " + list.get(list.size()-1);
 	}
 }

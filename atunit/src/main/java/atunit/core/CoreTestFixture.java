@@ -6,12 +6,11 @@ import java.util.Map;
 import java.util.Set;
 
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
-
 import atunit.spi.exception.InvalidTestException;
 import atunit.spi.model.TestFixture;
 import atunit.spi.plugin.AtUnitPlugin;
 import atunit.spi.plugin.ContainerPlugin;
+import com.google.common.collect.ImmutableSet;
 
 public class CoreTestFixture implements TestFixture {
 	
@@ -46,7 +45,7 @@ public class CoreTestFixture implements TestFixture {
 	}
 
 	public Set<Field> getFields() {
-		return Sets.immutableSet(fields.keySet());
+		return ImmutableSet.copyOf(fields.keySet());
 	}
 
 	public Class<?> getTestClass() {
