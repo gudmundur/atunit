@@ -125,17 +125,6 @@
 		</dependencies>
 	</dependencyManagement>
         
-        <distributionManagement>
-            <repository>
-		<id>main-repo</id>
-		<url>https://github.com/wcmatthysen/atunit/raw/master/releases</url>
-            </repository>
-            <snapshotRepository>
-		<id>snapshot-repo</id>
-		<url>https://github.com/wcmatthysen/atunit/raw/master/snapshots</url>
-            </snapshotRepository>
-        </distributionManagement>
-
 	<build>
 		<plugins>
 			<plugin>
