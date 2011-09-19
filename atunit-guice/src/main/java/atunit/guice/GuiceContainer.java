@@ -20,12 +20,10 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.Map;
-
 import atunit.core.IContainer;
-
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -59,7 +57,7 @@ public class GuiceContainer implements IContainer {
 		protected void configure() {
 
 			// map field values by type
-			Multimap<Type, Field> fieldsByType = Multimaps.newHashMultimap();
+			Multimap<Type, Field> fieldsByType = HashMultimap.create();
 			for (Field field : fields.keySet()) {
 				fieldsByType.put(field.getGenericType(), field);
 			}

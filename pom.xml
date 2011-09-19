@@ -73,9 +73,9 @@
 			</dependency>
 
 			<dependency>
-				<groupId>com.google.code.google-collections</groupId>
-				<artifactId>google-collect</artifactId>
-				<version>snapshot-20071022</version>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>10.0-rc1</version>
 			</dependency>
 
 			<dependency>
@@ -124,6 +124,17 @@
 			</dependency>			
 		</dependencies>
 	</dependencyManagement>
+        
+        <distributionManagement>
+            <repository>
+		<id>main-repo</id>
+		<url>https://github.com/wcmatthysen/atunit/raw/master/releases</url>
+            </repository>
+            <snapshotRepository>
+		<id>snapshot-repo</id>
+		<url>https://github.com/wcmatthysen/atunit/raw/master/snapshots</url>
+            </snapshotRepository>
+        </distributionManagement>
 
 	<build>
 		<plugins>

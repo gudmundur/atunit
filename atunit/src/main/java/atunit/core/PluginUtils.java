@@ -4,13 +4,13 @@ import java.util.List;
 import java.util.Set;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-
 import atunit.Plugins;
 import atunit.spi.exception.IncompatiblePluginsException;
 import atunit.spi.plugin.AtUnitPlugin;
 import atunit.spi.plugin.ContainerPlugin;
+import com.google.common.collect.ImmutableList;
+import java.util.Arrays;
 
 public class PluginUtils {
 
@@ -47,10 +47,10 @@ public class PluginUtils {
 		Plugins anno = testClass.getAnnotation(Plugins.class);
 		if ( anno != null ) {
 			// whack any duplicates
-			Set<Class<? extends AtUnitPlugin>> plugins = Sets.newLinkedHashSet(anno.value()); 
-			return Lists.immutableList(plugins);
+			Set<Class<? extends AtUnitPlugin>> plugins = Sets.newLinkedHashSet(Arrays.asList(anno.value())); 
+			return ImmutableList.copyOf(plugins);
 		} else {
-			return Lists.immutableList();
+			return ImmutableList.of();
 		}
 		
 	}
