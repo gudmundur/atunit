@@ -9,6 +9,7 @@ import atunit.Mock;
 import atunit.Stub;
 import atunit.Unit;
 
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 
 final public class TestClassUtils {
@@ -46,7 +47,7 @@ final public class TestClassUtils {
 				}
 			}
 		}
-		return Sets.immutableSet(fields);
+		return ImmutableSet.copyOf(fields);
 	}
 
 	/**
@@ -103,7 +104,7 @@ final public class TestClassUtils {
 				mocks.add(field);
 			}
 		}
-		return Sets.immutableSet(mocks);
+		return ImmutableSet.copyOf(mocks);
 	}
 
 	/**
@@ -116,7 +117,7 @@ final public class TestClassUtils {
 				stubs.add(field);
 			}
 		}
-		return Sets.immutableSet(stubs);
+		return ImmutableSet.copyOf(stubs);
 	}
 
 }
